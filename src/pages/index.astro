@@ -1,11 +1,120 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Nicolas Joannes — Industrial Designer</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:#f7f6f3;color:#1a1a1a;min-height:100vh}
+nav{position:fixed;top:0;left:0;width:100%;padding:2rem 3rem;display:flex;justify-content:space-between;align-items:flex-start;z-index:100}
+nav .logo{font-size:.75rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:#1a1a1a;transition:opacity .4s}
+nav ul{list-style:none;display:flex;gap:2rem}
+nav ul a{text-decoration:none;color:#1a1a1a;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;opacity:.5;transition:opacity .2s}
+nav ul a:hover{opacity:1}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 3rem 4rem;position:relative;overflow:hidden;transition:filter .3s ease,opacity .3s ease}
+.hero.blurred{filter:blur(6px);opacity:.4}
+.hero-name{font-family:'EB Garamond',serif;font-size:clamp(5rem,14vw,14rem);font-weight:400;line-height:.9;letter-spacing:-.02em;color:#1a1a1a;pointer-events:none;user-select:none}
+.hero-name em{font-style:italic;color:#888}
+.hero-sub{margin-top:2rem;display:flex;justify-content:space-between;align-items:flex-end}
+.hero-sub p{font-size:.85rem;color:#888;letter-spacing:.05em;max-width:300px;line-height:1.6}
+.hero-sub .scroll-hint{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#bbb}
+.projects{padding:0 3rem 6rem}
+.projects-header{padding:3rem 0 1rem;border-top:1px solid #ddd;display:flex;justify-content:space-between;align-items:center}
+.projects-header span{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#999}
+.project-item{border-top:1px solid #e0e0e0;display:grid;grid-template-columns:3rem 1fr auto;align-items:center;gap:2rem;padding:1.5rem 0;text-decoration:none;color:#1a1a1a;transition:opacity .15s;position:relative;cursor:pointer}
+.project-item:hover{opacity:.6}
+.project-num{font-size:.75rem;color:#bbb;letter-spacing:.05em}
+.project-title{font-family:'EB Garamond',serif;font-size:clamp(1.5rem,3vw,2.5rem);font-weight:400}
+.project-meta{text-align:right}
+.project-meta .cat{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#999;display:block}
+.project-meta .year{font-size:.7rem;color:#bbb;display:block;margin-top:.2rem}
+.last-border{border-bottom:1px solid #e0e0e0}
+footer{padding:3rem;border-top:1px solid #ddd;display:flex;justify-content:space-between;font-size:.75rem;color:#999;letter-spacing:.08em}
+</style>
+</head>
+<body>
 
-<Layout>
-	<Welcome />
-</Layout>
+<nav>
+  <span class="logo">Nicolas Joannes</span>
+  <ul>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="hero-name">
+    Nicolas<br><em>Joannes</em>
+  </div>
+  <div class="hero-sub">
+    <p>Industrial designer based in Vigo.<br>Form, function & process.</p>
+    <span class="scroll-hint">Scroll to explore</span>
+  </div>
+</section>
+
+<section class="projects" id="projects">
+  <div class="projects-header">
+    <span>Selected Work</span>
+    <span>2024 — 2025</span>
+  </div>
+  <a href="/projects/flooding-assistance-vehicle" class="project-item">
+    <span class="project-num">01</span>
+    <span class="project-title">Flooding Assistance Vehicle</span>
+    <div class="project-meta"><span class="cat">Micromobility</span><span class="year">2025</span></div>
+  </a>
+  <a href="/projects/cycling-awareness-system" class="project-item">
+    <span class="project-num">02</span>
+    <span class="project-title">Cycling Awareness System</span>
+    <div class="project-meta"><span class="cat">Road Safety</span><span class="year">2025</span></div>
+  </a>
+  <a href="/projects/new" class="project-item">
+    <span class="project-num">03</span>
+    <span class="project-title">NEW</span>
+    <div class="project-meta"><span class="cat">Speculative Fashion</span><span class="year">2025</span></div>
+  </a>
+  <a href="/projects/swiftlift" class="project-item">
+    <span class="project-num">04</span>
+    <span class="project-title">SwiftLift</span>
+    <div class="project-meta"><span class="cat">Entrepreneurship</span><span class="year">2025</span></div>
+  </a>
+  <a href="/projects/how-to-make-a-bed" class="project-item">
+    <span class="project-num">05</span>
+    <span class="project-title">How to Make a Bed</span>
+    <div class="project-meta"><span class="cat">Entrepreneurship</span><span class="year">2024</span></div>
+  </a>
+  <a href="/projects/f1-tour" class="project-item">
+    <span class="project-num">06</span>
+    <span class="project-title">F1 Tour</span>
+    <div class="project-meta"><span class="cat">Micromobility</span><span class="year">2024</span></div>
+  </a>
+  <a href="/projects/self-watering-plant-pot" class="project-item last-border">
+    <span class="project-num">07</span>
+    <span class="project-title">Self Watering Plant Pot</span>
+    <div class="project-meta"><span class="cat">Biology</span><span class="year">2024</span></div>
+  </a>
+</section>
+
+<footer>
+  <span>© 2026 Nicolas Joannes</span>
+  <span>Vigo, Galicia</span>
+</footer>
+
+<script>
+const hero = document.getElementById('hero');
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  const threshold = 80;
+  if (scrollY > threshold) {
+    hero.classList.add('blurred');
+  } else {
+    hero.classList.remove('blurred');
+  }
+});
+</script>
+</body>
+</html>
