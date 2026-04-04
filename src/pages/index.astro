@@ -16,8 +16,6 @@ a{text-decoration:none}
 nav ul{list-style:none;display:flex;gap:2rem}
 nav ul a{text-decoration:none;color:#1a1a1a;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;opacity:.5;transition:opacity .2s}
 nav ul a:hover{opacity:1}
-
-/* HERO */
 .hero{height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 3rem 4rem;position:relative;overflow:hidden;transition:filter .4s ease,opacity .4s ease}
 .hero.blurred{filter:blur(8px);opacity:.3}
 .hero-name{font-family:'EB Garamond',serif;font-size:clamp(5rem,14vw,14rem);font-weight:400;line-height:.9;letter-spacing:-.02em;pointer-events:none;user-select:none}
@@ -25,14 +23,7 @@ nav ul a:hover{opacity:1}
 .hero-sub{margin-top:2rem;display:flex;justify-content:space-between;align-items:flex-end}
 .hero-sub p{font-size:.85rem;color:#888;max-width:300px;line-height:1.6}
 .hero-sub .scroll-hint{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#bbb}
-
-<section class="about-scroll">
-  <img src="/about-1.jpg" alt="" />
-  <img src="/about-2.jpg" alt="" />
-  <img src="/about-3.jpg" alt="" />
-</section>
-
-/* PROJECTS */
+.about-scroll img{width:100%;display:block}
 .project{height:100vh;position:relative;display:flex;align-items:flex-end;overflow:hidden;cursor:pointer}
 .project-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .6s ease}
 .project:hover .project-bg{transform:scale(1.03)}
@@ -41,11 +32,7 @@ nav ul a:hover{opacity:1}
 .project-info .num{font-size:.75rem;letter-spacing:.15em;opacity:.6;margin-bottom:.8rem;display:block}
 .project-info h2{font-family:'EB Garamond',serif;font-size:clamp(2rem,5vw,4rem);font-weight:400;line-height:1;margin-bottom:.8rem}
 .project-info .meta{display:flex;gap:1.5rem;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
-
 footer{padding:3rem;border-top:1px solid #ddd;display:flex;justify-content:space-between;font-size:.75rem;color:#999}
-
-.about-scroll img{width:100%;display:block}
-
 </style>
 </head>
 <body>
@@ -66,6 +53,12 @@ footer{padding:3rem;border-top:1px solid #ddd;display:flex;justify-content:space
   <div class="hero-sub">
     <p>Industrial designer based in London.<br>"Form, function & process" according to my AI lol.</p>
   </div>
+</section>
+
+<section class="about-scroll">
+  <img src="/about-1.jpg" alt="" />
+  <img src="/about-2.jpg" alt="" />
+  <img src="/about-3.jpg" alt="" />
 </section>
 
 <div id="projects">
