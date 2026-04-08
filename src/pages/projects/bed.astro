@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Cycling Awareness System — Nicolas Joannes</title>
+<title>How to Make a Bed — Nicolas Joannes</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&family=Inter:wght@300;400&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
@@ -12,29 +12,17 @@ body{font-family:'Inter',sans-serif;background:#f7f6f3;color:#1a1a1a}
 nav{position:fixed;top:0;left:0;width:100%;padding:2rem 3rem;display:flex;justify-content:space-between;z-index:100;background:#f7f6f3}
 nav a{text-decoration:none;color:#1a1a1a;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;opacity:.5}
 nav a:hover{opacity:1}
-.content{max-width:900px;margin:0 auto;padding:8rem 2rem 6rem}
+.video-hero{width:100%;height:100vh;position:relative;background:#000}
+.video-hero iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
+.content{max-width:900px;margin:0 auto;padding:6rem 2rem}
 .meta{display:flex;gap:4rem;margin-bottom:4rem;padding-bottom:2rem;border-bottom:1px solid #e0e0e0}
 .meta-item span{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:#999;display:block;margin-bottom:.4rem}
 .meta-item p{font-size:.9rem}
 h1{font-family:'EB Garamond',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:400;line-height:1.1;margin-bottom:3rem}
-.slide{width:100%;display:block;margin:2rem 0;border-radius:4px;object-fit:contain;transition:transform 0.3s ease,box-shadow 0.3s ease;cursor:zoom-in}
-.slide:hover{transform:scale(1.02);box-shadow:0 20px 60px rgba(0,0,0,0.12)}
 footer{padding:3rem;border-top:1px solid #ddd;display:flex;justify-content:space-between;font-size:.75rem;color:#999}
 footer a{color:#999;text-decoration:none}
 </style>
 </head>
-<script>
-document.querySelectorAll('.slide').forEach(img => {
-  img.addEventListener('mouseenter', () => {
-    img.style.transform = 'scale(1.02)';
-    img.style.boxShadow = '0 20px 60px rgba(0,0,0,0.12)';
-  });
-  img.addEventListener('mouseleave', () => {
-    img.style.transform = 'scale(1)';
-    img.style.boxShadow = 'none';
-  });
-});
-</script>
 <body>
 
 <nav>
@@ -42,26 +30,21 @@ document.querySelectorAll('.slide').forEach(img => {
   <a href="/">Nicolas Joannes</a>
 </nav>
 
+<div class="video-hero">
+  <iframe
+    src="https://www.youtube.com/embed/hpPQZPbOg3s?autoplay=1&loop=1&playlist=hpPQZPbOg3s"
+    allow="autoplay; fullscreen"
+    allowfullscreen>
+  </iframe>
+</div>
+
 <div class="content">
   <div class="meta">
-    <div class="meta-item"><span>Category</span><p>Road Safety</p></div>
-    <div class="meta-item"><span>Year</span><p>2025</p></div>
+    <div class="meta-item"><span>Category</span><p>Entrepreneurship</p></div>
+    <div class="meta-item"><span>Year</span><p>2024</p></div>
     <div class="meta-item"><span>Type</span><p>Industrial Design</p></div>
   </div>
-
-  <h1>Cycling Awareness System</h1>
-
-  <img class="slide" src="/cas-1.jpeg" alt="Slide 1" />
-  <img class="slide" src="/cas-2.jpeg" alt="Slide 2" />
-  <img class="slide" src="/cas-3.jpeg" alt="Slide 3" />
-  <img class="slide" src="/cas-4.jpeg" alt="Slide 4" />
-  <img class="slide" src="/cas-5.jpeg" alt="Slide 5" />
-  <img class="slide" src="/cas-6.jpeg" alt="Slide 6" />
-  <img class="slide" src="/cas-7.jpeg" alt="Slide 7" />
-  <img class="slide" src="/cas-8.jpeg" alt="Slide 8" />
-  <img class="slide" src="/cas-9.jpeg" alt="Slide 9" />
-  <img class="slide" src="/cas-10.jpeg" alt="Slide 10" />
-  <img class="slide" src="/cas-11.jpeg" alt="Slide 11" />
+  <h1>How to Make a Bed</h1>
 </div>
 
 <footer>
