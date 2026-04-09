@@ -40,6 +40,8 @@ nav ul a:hover{opacity:1}
 footer{padding:3rem;border-top:1px solid #ddd;display:flex;justify-content:space-between;font-size:.75rem;color:#999}
 .about-frame{position:relative}
 .gif-overlay{position:absolute;top:0;left:0;width:auto;height:auto;object-fit:contain;pointer-events:none}
+.page-loader{position:fixed;inset:0;background-image:conic-gradient(orange,orangered);z-index:999;transform:translateY(0);transition:transform .8s cubic-bezier(0.76,0,0.24,1)}
+.page-loader.hide{transform:translateY(-100%)}
 </style>
 </head>
 <script>
@@ -47,7 +49,7 @@ footer{padding:3rem;border-top:1px solid #ddd;display:flex;justify-content:space
   inject();
 </script>
 <body>
-
+<div class="page-loader" id="loader"></div>
 <nav>
   <span class="logo">Nicolas Joannes</span>
   <ul>
@@ -150,6 +152,12 @@ footer{padding:3rem;border-top:1px solid #ddd;display:flex;justify-content:space
 </footer>
 
 <script>
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hide');
+  }, 300);
+});
+
 const hero = document.getElementById('hero');
 window.addEventListener('scroll', () => {
   hero.classList.toggle('blurred', window.scrollY > 80);
