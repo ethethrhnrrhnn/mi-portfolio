@@ -7,9 +7,14 @@
 <title>Nicolás Joannes — Industrial Designer</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&family=Inter:wght@300;400&display=swap');
-*{margin:0;padding:0;box-sizing:border-box}
+*{margin:0;padding:0;box-sizing:border-box;cursor:none}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;color:#1a1a1a;background-image:conic-gradient(rgb(255, 255, 255),rgb(255, 255, 255));background-size:100% 100%;background-repeat:no-repeat;background-color:rgb(255, 255, 255)}
+body{font-family:'Inter',sans-serif;color:#1a1a1a;background:#f7f6f3}
+.cursor{position:fixed;width:8px;height:8px;background:#1a1a1a;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s ease}
+.cursor-follower{position:fixed;width:32px;height:32px;border:1px solid rgba(26,26,26,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .06s linear,top .06s linear}
+.cursor.expand{transform:translate(-50%,-50%) scale(3);opacity:.3}
+.page-loader{position:fixed;inset:0;background-image:conic-gradient(orange,orangered);z-index:9999;transform:translateY(0);transition:transform .8s cubic-bezier(0.76,0,0.24,1)}
+.page-loader.hide{transform:translateY(-100%)}
 nav{position:fixed;top:0;left:0;width:100%;padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center;z-index:100;mix-blend-mode:multiply}
 nav .logo{font-size:.75rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase}
 a{text-decoration:none}
@@ -22,34 +27,33 @@ nav ul a:hover{opacity:1}
 .hero-name em{font-style:italic;color:#888}
 .hero-sub{margin-top:2rem;display:flex;justify-content:space-between;align-items:flex-end}
 .hero-sub p{font-size:.85rem;color:#888;max-width:300px;line-height:1.6}
-.hero-sub .scroll-hint{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#bbb}
 .about-scroll img{width:100%;display:block}
-.project{height:100svh;position:relative;display:flex;align-items:flex-end;overflow:hidden;cursor:pointer}
-.project-bg{position:absolute;inset:0;background-size:cover;background-position:center top;transition:transform .6s ease}
-@media(max-width:768px){
-  .project{height:70svh}
-  .project-bg{background-size:contain;background-repeat:no-repeat;background-color:#f7f6f3}
-}
-
+.about-frame{position:relative}
+.gif-overlay{position:absolute;top:0;left:0;width:auto;height:auto;object-fit:contain;pointer-events:none}
+.project{height:100svh;position:relative;display:flex;align-items:flex-end;overflow:hidden}
+.project-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .6s ease}
 .project:hover .project-bg{transform:scale(1.03)}
-.project-overlay{position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 50%)}
+.project-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.6) 0%,rgba(0,0,0,0) 50%)}
 .project-info{position:relative;z-index:2;padding:3rem;color:#fff;text-decoration:none;display:block;width:100%}
 .project-info .num{font-size:.75rem;letter-spacing:.15em;opacity:.6;margin-bottom:.8rem;display:block}
 .project-info h2{font-family:'EB Garamond',serif;font-size:clamp(2rem,5vw,4rem);font-weight:400;line-height:1;margin-bottom:.8rem}
 .project-info .meta{display:flex;gap:1.5rem;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
 footer{padding:3rem;border-top:1px solid #ddd;display:flex;justify-content:space-between;font-size:.75rem;color:#999}
-.about-frame{position:relative}
-.gif-overlay{position:absolute;top:0;left:0;width:auto;height:auto;object-fit:contain;pointer-events:none}
-.page-loader{position:fixed;inset:0;background-image:conic-gradient(orange,orangered);z-index:999;transform:translateY(0);transition:transform .8s cubic-bezier(0.76,0,0.24,1)}
-.page-loader.hide{transform:translateY(-100%)}
+@media(max-width:768px){
+  .project{height:70svh}
+  .project-bg{background-size:contain;background-repeat:no-repeat;background-color:#f7f6f3}
+}
 </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="view-transition" content="same-origin" />
 </head>
-<script>
-  import { inject } from '@vercel/analytics';
-  inject();
-</script>
 <body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="follower"></div>
 <div class="page-loader" id="loader"></div>
+
 <nav>
   <span class="logo">Nicolas Joannes</span>
   <ul>
@@ -71,79 +75,58 @@ footer{padding:3rem;border-top:1px solid #ddd;display:flex;justify-content:space
 <section class="about-scroll">
   <div class="about-frame">
     <img src="/about-1.jpg" alt="" />
-    <img class="gif-overlay" src="/gif-1.gif" alt="" />
+    <img class="gif-1" src="/gif-1.gif" alt="" />
   </div>
   <img src="/about-2.jpg" alt="" />
   <img src="/about-3.jpg" alt="" />
 </section>
 
 <div id="projects">
-
   <a href="/projects/cycling-awareness-system" class="project">
     <div class="project-bg" style="background-image:url('/cas-cover.jpeg')"></div>
     <div class="project-overlay"></div>
     <div class="project-info">
       <span class="num">01</span>
       <h2>Cycling Awareness System</h2>
-      <div class="meta">
-        <span>Road Safety</span>
-        <span>2025</span>
-      </div>
+      <div class="meta"><span>Road Safety</span><span>2025</span></div>
     </div>
   </a>
-
   <a href="/projects/flooding-assistance-vehicle" class="project">
     <div class="project-bg" style="background-image:url('/fav-cover.png')"></div>
     <div class="project-overlay"></div>
     <div class="project-info">
       <span class="num">02</span>
       <h2>Flooding Assistance Vehicle</h2>
-      <div class="meta">
-        <span>Micromobility</span>
-        <span>2025</span>
-      </div>
+      <div class="meta"><span>Micromobility</span><span>2025</span></div>
     </div>
   </a>
-
-<a href="/projects/swiftlift" class="project">
+  <a href="/projects/swiftlift" class="project">
     <div class="project-bg" style="background-image:url('/swiftlift-cover.png')"></div>
     <div class="project-overlay"></div>
     <div class="project-info">
       <span class="num">03</span>
       <h2>SwiftLift</h2>
-      <div class="meta">
-        <span>Entrepreneurship</span>
-        <span>2025</span>
-      </div>
+      <div class="meta"><span>Entrepreneurship</span><span>2025</span></div>
     </div>
   </a>
-
   <a href="/projects/bed" class="project">
     <div class="project-bg" style="background-image:url('/bed-cover.jpg')"></div>
     <div class="project-overlay"></div>
     <div class="project-info">
       <span class="num">04</span>
       <h2>How to Make a Bed</h2>
-      <div class="meta">
-        <span>Entrepreneurship</span>
-        <span>2024</span>
-      </div>
+      <div class="meta"><span>Entrepreneurship</span><span>2024</span></div>
     </div>
   </a>
-
   <a href="/projects/f1-tour" class="project">
     <div class="project-bg" style="background-image:url('/f1-cover.jpg')"></div>
     <div class="project-overlay"></div>
     <div class="project-info">
       <span class="num">05</span>
       <h2>F1 Tour</h2>
-      <div class="meta">
-        <span>Micromobility</span>
-        <span>2024</span>
-      </div>
+      <div class="meta"><span>Micromobility</span><span>2024</span></div>
     </div>
   </a>
-
 </div>
 
 <footer>
@@ -152,6 +135,32 @@ footer{padding:3rem;border-top:1px solid #ddd;display:flex;justify-content:space
 </footer>
 
 <script>
+const cursor = document.getElementById('cursor');
+const follower = document.getElementById('follower');
+let mouseX = 0, mouseY = 0;
+let followerX = 0, followerY = 0;
+
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  cursor.style.left = mouseX + 'px';
+  cursor.style.top = mouseY + 'px';
+});
+
+function animateFollower() {
+  followerX += (mouseX - followerX) * 0.15;
+  followerY += (mouseY - followerY) * 0.15;
+  follower.style.left = followerX + 'px';
+  follower.style.top = followerY + 'px';
+  requestAnimationFrame(animateFollower);
+}
+animateFollower();
+
+document.querySelectorAll('a, .project').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
+});
+
 window.addEventListener('load', () => {
   setTimeout(() => {
     document.getElementById('loader').classList.add('hide');
