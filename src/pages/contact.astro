@@ -17,8 +17,13 @@ nav{position:fixed;top:0;left:0;width:100%;padding:2rem 3rem;display:flex;justif
 nav a{text-decoration:none;color:#1a1a1a;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;opacity:.5}
 nav a:hover{opacity:1}
 .page{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 4rem 4rem}
-h1{font-family:'EB Garamond',serif;font-size:clamp(3rem,8vw,8rem);font-weight:400;line-height:.9;letter-spacing:-.02em;margin-bottom:4rem}
+.top-row{display:flex;align-items:flex-start;justify-content:space-between;gap:4rem;margin-bottom:4rem}
+h1{font-family:'EB Garamond',serif;font-size:clamp(4rem,12vw,12rem);font-weight:400;line-height:.9;letter-spacing:-.02em;flex-shrink:0}
 h1 em{font-style:italic;color:#888}
+.snake-wrap{display:flex;flex-direction:column;align-items:flex-end;gap:.75rem;padding-top:.5rem}
+.snake-meta{display:flex;justify-content:space-between;width:100%;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#999}
+canvas{display:block;border:1px solid #e0e0e0;background:#f7f6f3}
+.snake-hint{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#bbb;text-align:center;width:100%}
 .links{display:flex;flex-direction:column;gap:1.5rem}
 .contact-link{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 0;border-top:1px solid #e0e0e0;text-decoration:none;color:#1a1a1a;transition:opacity .2s}
 .contact-link:last-child{border-bottom:1px solid #e0e0e0}
@@ -40,22 +45,28 @@ footer{padding:3rem 4rem;border-top:1px solid #ddd;display:flex;justify-content:
 </nav>
 
 <div class="page">
-  <h1>Let's<br><em>talk.</em></h1>
+  <div class="top-row">
+    <h1>Let's <em>talk.</em></h1>
+
+    <div class="snake-wrap">
+      <div class="snake-meta">
+        <span>Snake</span>
+        <span id="score">0</span>
+      </div>
+      <canvas id="snake" width="220" height="220"></canvas>
+      <span class="snake-hint" id="hint">click to play · arrow keys</span>
+    </div>
+  </div>
 
   <div class="links">
-    <a href="mailto:nicolasjoannesgil@gmail.com" class="contact-link">
+    <a href="mailto:nico.gil.arboli@gmail.com" class="contact-link">
       <span class="label">Email</span>
-      <span class="value">nicolasjoannesgil@gmail.com</span>
+      <span class="value">nico.gil.arboli@gmail.com</span>
       <span class="arrow">↗</span>
     </a>
     <a href="https://linkedin.com/in/njoannes" target="_blank" class="contact-link">
       <span class="label">LinkedIn</span>
       <span class="value">njoannes</span>
-      <span class="arrow">↗</span>
-    </a>
-    <a href="https://njoannes.myportfolio.com" target="_blank" class="contact-link">
-      <span class="label">Portfolio</span>
-      <span class="value">njoannes.myportfolio.com</span>
       <span class="arrow">↗</span>
     </a>
   </div>
@@ -67,6 +78,7 @@ footer{padding:3rem 4rem;border-top:1px solid #ddd;display:flex;justify-content:
 </footer>
 
 <script>
+// cursor
 const cursor = document.getElementById('cursor');
 const follower = document.getElementById('follower');
 let mouseX = 0, mouseY = 0;
@@ -89,6 +101,127 @@ document.querySelectorAll('a').forEach(el => {
   el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
   el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
 });
+
+// snake
+const canvas = document.getElementById('snake') as HTMLCanvasElement;
+const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+const hint = document.getElementById('hint') as HTMLElement;
+const scoreEl = document.getElementById('score') as HTMLElement;
+const CELL = 11;
+const COLS = Math.floor(canvas.width / CELL);
+const ROWS = Math.floor(canvas.height / CELL);
+
+type Vec = { x: number; y: number };
+let snake: Vec[] = [];
+let dir: Vec = { x: 1, y: 0 };
+let nextDir: Vec = { x: 1, y: 0 };
+let food: Vec = { x: 0, y: 0 };
+let score = 0;
+let loop = 0;
+let running = false;
+let dead = false;
+
+function rand(max: number) { return Math.floor(Math.random() * max); }
+
+function spawnFood(): Vec {
+  let pos: Vec;
+  do { pos = { x: rand(COLS), y: rand(ROWS) }; }
+  while (snake.some(s => s.x === pos.x && s.y === pos.y));
+  return pos;
+}
+
+function init() {
+  const mx = Math.floor(COLS / 2), my = Math.floor(ROWS / 2);
+  snake = [{x:mx,y:my},{x:mx-1,y:my},{x:mx-2,y:my}];
+  dir = {x:1,y:0};
+  nextDir = {x:1,y:0};
+  food = spawnFood();
+  score = 0;
+  scoreEl.textContent = '0';
+  dead = false;
+  draw();
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = '#1a1a1a';
+  ctx.fillRect(food.x * CELL + 2, food.y * CELL + 2, CELL - 4, CELL - 4);
+
+  snake.forEach((seg, i) => {
+    const alpha = 1 - (i / snake.length) * 0.55;
+    ctx.fillStyle = `rgba(26,26,26,${alpha})`;
+    ctx.fillRect(seg.x * CELL + 1, seg.y * CELL + 1, CELL - 2, CELL - 2);
+  });
+
+  if (dead) {
+    ctx.fillStyle = 'rgba(247,246,243,0.82)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#1a1a1a';
+    ctx.font = '400 11px Inter, sans-serif';
+    ctx.letterSpacing = '0.1em';
+    ctx.textAlign = 'center';
+    ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2 - 8);
+    ctx.fillStyle = '#999';
+    ctx.font = '400 9px Inter, sans-serif';
+    ctx.fillText('click to retry', canvas.width / 2, canvas.height / 2 + 10);
+  }
+}
+
+function tick() {
+  dir = nextDir;
+  const head: Vec = { x: snake[0].x + dir.x, y: snake[0].y + dir.y };
+
+  if (head.x < 0 || head.x >= COLS || head.y < 0 || head.y >= ROWS ||
+      snake.some(s => s.x === head.x && s.y === head.y)) {
+    dead = true;
+    running = false;
+    clearInterval(loop);
+    hint.textContent = 'click to retry';
+    draw();
+    return;
+  }
+
+  snake.unshift(head);
+  if (head.x === food.x && head.y === food.y) {
+    score++;
+    scoreEl.textContent = String(score);
+    food = spawnFood();
+  } else {
+    snake.pop();
+  }
+  draw();
+}
+
+function start() {
+  if (running) return;
+  init();
+  running = true;
+  hint.textContent = 'arrow keys to move';
+  loop = setInterval(tick, 110) as unknown as number;
+}
+
+canvas.addEventListener('click', () => {
+  if (!running) start();
+});
+
+const dirMap: Record<string, Vec> = {
+  ArrowUp:    {x:0,y:-1},
+  ArrowDown:  {x:0,y:1},
+  ArrowLeft:  {x:-1,y:0},
+  ArrowRight: {x:1,y:0},
+};
+
+document.addEventListener('keydown', (e: KeyboardEvent) => {
+  const d = dirMap[e.key];
+  if (!d) return;
+  e.preventDefault();
+  if (!running) { start(); return; }
+  if (d.x === -dir.x && d.y === -dir.y) return;
+  nextDir = d;
+});
+
+init();
 </script>
 
 </body>
