@@ -1,0 +1,95 @@
+---
+---
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Contact — Nicolas Joannes</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&family=Inter:wght@300;400&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+*,*::before,*::after,html,body,a,button,input{cursor:none !important}
+body{font-family:'Inter',sans-serif;background:#f7f6f3;color:#1a1a1a;min-height:100vh}
+.cursor{position:fixed;width:8px;height:8px;background:#1a1a1a;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s ease}
+.cursor-follower{position:fixed;width:32px;height:32px;border:1px solid rgba(26,26,26,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%)}
+.cursor.expand{transform:translate(-50%,-50%) scale(3);opacity:.3}
+nav{position:fixed;top:0;left:0;width:100%;padding:2rem 3rem;display:flex;justify-content:space-between;z-index:100}
+nav a{text-decoration:none;color:#1a1a1a;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;opacity:.5}
+nav a:hover{opacity:1}
+.page{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 4rem 4rem}
+h1{font-family:'EB Garamond',serif;font-size:clamp(3rem,8vw,8rem);font-weight:400;line-height:.9;letter-spacing:-.02em;margin-bottom:4rem}
+h1 em{font-style:italic;color:#888}
+.links{display:flex;flex-direction:column;gap:1.5rem}
+.contact-link{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 0;border-top:1px solid #e0e0e0;text-decoration:none;color:#1a1a1a;transition:opacity .2s}
+.contact-link:last-child{border-bottom:1px solid #e0e0e0}
+.contact-link:hover{opacity:.5}
+.contact-link .label{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#999}
+.contact-link .value{font-family:'EB Garamond',serif;font-size:1.8rem;font-weight:400}
+.contact-link .arrow{font-size:1.2rem;opacity:.3}
+footer{padding:3rem 4rem;border-top:1px solid #ddd;display:flex;justify-content:space-between;font-size:.75rem;color:#999}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="follower"></div>
+
+<nav>
+  <a href="/">← Back</a>
+  <a href="/">Nicolas Joannes</a>
+</nav>
+
+<div class="page">
+  <h1>Let's<br><em>talk.</em></h1>
+
+  <div class="links">
+    <a href="mailto:nicolasjoannesgil@gmail.com" class="contact-link">
+      <span class="label">Email</span>
+      <span class="value">nicolasjoannesgil@gmail.com</span>
+      <span class="arrow">↗</span>
+    </a>
+    <a href="https://linkedin.com/in/njoannes" target="_blank" class="contact-link">
+      <span class="label">LinkedIn</span>
+      <span class="value">njoannes</span>
+      <span class="arrow">↗</span>
+    </a>
+    <a href="https://njoannes.myportfolio.com" target="_blank" class="contact-link">
+      <span class="label">Portfolio</span>
+      <span class="value">njoannes.myportfolio.com</span>
+      <span class="arrow">↗</span>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <span>© 2026 Nicolas Joannes</span>
+  <span>London, UK</span>
+</footer>
+
+<script>
+const cursor = document.getElementById('cursor');
+const follower = document.getElementById('follower');
+let mouseX = 0, mouseY = 0;
+let followerX = 0, followerY = 0;
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  cursor.style.left = mouseX + 'px';
+  cursor.style.top = mouseY + 'px';
+});
+function animateFollower() {
+  followerX += (mouseX - followerX) * 0.15;
+  followerY += (mouseY - followerY) * 0.15;
+  follower.style.left = followerX + 'px';
+  follower.style.top = followerY + 'px';
+  requestAnimationFrame(animateFollower);
+}
+animateFollower();
+document.querySelectorAll('a').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
+});
+</script>
+
+</body>
+</html>
