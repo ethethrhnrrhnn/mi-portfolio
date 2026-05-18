@@ -11,42 +11,41 @@
 *,*::before,*::after,html,body,a,button,input{cursor:none !important}
 html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;color:#1a1a1a;background:#f7f6f3}
+
+/* cursor — hidden on touch */
 .cursor{position:fixed;width:8px;height:8px;background:#1a1a1a;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s ease}
-.cursor-follower{position:fixed;width:32px;height:32px;border:1px solid rgba(26,26,26,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%)}
+.cursor-follower{position:fixed;width:32px;height:32px;border:1px solid rgba(26,26,26,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .08s ease,top .08s ease}
 .cursor.expand{transform:translate(-50%,-50%) scale(3);opacity:.3}
-.page-loader{position:fixed;inset:0;background-image:conic-gradient(orange,orangered);z-index:9999;transform:translateY(0);transition:transform .8s cubic-bezier(0.76,0,0.24,1)}
+@media(hover:none){.cursor,.cursor-follower{display:none}*,*::before,*::after,html,body,a,button,input{cursor:auto !important}}
+
+/* loader */
+.page-loader{position:fixed;inset:0;background-image:conic-gradient(orange,orangered);z-index:10000;transform:translateY(0);transition:transform .8s cubic-bezier(0.76,0,0.24,1)}
 .page-loader.hide{transform:translateY(-100%)}
+
+/* nav */
 nav{position:fixed;top:0;left:0;width:100%;padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center;z-index:100;mix-blend-mode:multiply}
 nav .logo{font-size:.75rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase}
 a{text-decoration:none}
 nav ul{list-style:none;display:flex;gap:2rem}
-nav ul a{text-decoration:none;color:#1a1a1a;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;opacity:.5;transition:opacity .2s}
+nav ul a{color:#1a1a1a;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;opacity:.5;transition:opacity .2s}
 nav ul a:hover{opacity:1}
+
+/* hero */
 .hero{height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 3rem 4rem;position:relative;overflow:hidden;transition:filter .4s ease,opacity .4s ease}
 .hero.blurred{filter:blur(8px);opacity:.3}
 .hero-name{font-family:'EB Garamond',serif;font-size:clamp(5rem,14vw,14rem);font-weight:400;line-height:.9;letter-spacing:-.02em;pointer-events:none;user-select:none}
 .hero-name em{font-style:italic;color:#888}
-.hero-sub{margin-top:2rem;display:flex;justify-content:space-between;align-items:flex-end}
+.hero-sub{margin-top:2rem;display:flex;justify-content:space-between;align-items:flex-end;gap:1rem}
 .hero-sub p{font-size:.85rem;color:#888;max-width:300px;line-height:1.6}
-.about-scroll img{width:100%;display:block}gif-over
-.about-frame{position:relative;display:inline-block;width:100%}.lay{position:absolute;top:2rem;right:2rem;width:150px;height:auto;pointer-events:none}
-.project{height:100svh;position:relative;display:flex;align-items:flex-end;overflow:hidden}
-.project-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .6s ease}
-.project:hover .project-bg{transform:scale(1.03)}
-.project-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.6) 0%,rgba(0,0,0,0) 50%)}
-.project-info{position:relative;z-index:2;padding:3rem;color:#fff;text-decoration:none;display:block;width:100%}
-.project-info .num{font-size:.75rem;letter-spacing:.15em;opacity:.6;margin-bottom:.8rem;display:block}
-.project-info h2{font-family:'EB Garamond',serif;font-size:clamp(2rem,5vw,4rem);font-weight:400;line-height:1;margin-bottom:.8rem}
-.project-info .meta{display:flex;gap:1.5rem;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
-footer{padding:3rem;border-top:1px solid #ddd;display:flex;justify-content:space-between;font-size:.75rem;color:#999}
-@media(max-width:768px){
-  .project{height:70svh}
-  .project-bg{background-size:cover;background-position:center;background-color:#f7f6f3}
-  .hero-top{display:none}
-  .hero{padding:0 1.5rem 3rem}
-  .hero-name{font-size:clamp(3.5rem,18vw,6rem)}
-  nav{padding:1.5rem}
-}
+.scroll-hint{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#bbb;display:flex;align-items:center;gap:.5rem;white-space:nowrap}
+.scroll-hint::before{content:'';display:block;width:40px;height:1px;background:#bbb}
+
+/* about strip */
+.about-scroll img{width:100%;display:block}
+.about-frame{position:relative;display:inline-block;width:100%}
+.lay{position:absolute;top:2rem;right:2rem;width:150px;height:auto;pointer-events:none}
+
+/* sphere */
 .hero-top{position:absolute;top:16rem;right:14rem}
 .sphere{width:400px;height:400px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;overflow:visible;border-radius:100%;transform-style:preserve-3d;animation:rotate 8s linear infinite;position:relative}
 .sphere .meridian{position:absolute;width:400px;height:400px;border:1px solid rgba(0,0,0,0.25);border-radius:100%;transform-style:preserve-3d}
@@ -55,6 +54,45 @@ footer{padding:3rem;border-top:1px solid #ddd;display:flex;justify-content:space
 .sphere .latitude:nth-child(37){width:394px;height:394px;top:3px;left:3px;transform:rotateY(90deg) translateZ(-32px)}.sphere .latitude:nth-child(38){width:374px;height:374px;top:13px;left:13px;transform:rotateY(90deg) translateZ(-66px)}.sphere .latitude:nth-child(39){width:346px;height:346px;top:27px;left:27px;transform:rotateY(90deg) translateZ(-100px)}.sphere .latitude:nth-child(40){width:294px;height:294px;top:53px;left:53px;transform:rotateY(90deg) translateZ(-134px)}.sphere .latitude:nth-child(41){width:214px;height:214px;top:93px;left:93px;transform:rotateY(90deg) translateZ(-166px)}.sphere .latitude:nth-child(42){width:26px;height:26px;top:187px;left:187px;border:14px solid black;transform:rotateY(90deg) translateZ(-200px)}.sphere .latitude:nth-child(43){width:394px;height:394px;top:3px;left:3px;transform:rotateY(90deg) translateZ(32px)}.sphere .latitude:nth-child(44){width:374px;height:374px;top:13px;left:13px;transform:rotateY(90deg) translateZ(66px)}.sphere .latitude:nth-child(45){width:346px;height:346px;top:27px;left:27px;transform:rotateY(90deg) translateZ(100px)}.sphere .latitude:nth-child(46){width:294px;height:294px;top:53px;left:53px;transform:rotateY(90deg) translateZ(134px)}.sphere .latitude:nth-child(47){width:214px;height:214px;top:93px;left:93px;transform:rotateY(90deg) translateZ(166px)}.sphere .latitude:nth-child(48){width:26px;height:26px;top:187px;left:187px;transform:rotateY(90deg) translateZ(200px);border:14px solid black}
 .sphere .axis{position:absolute;width:800px;height:2px;top:calc(50% - 1px);background:linear-gradient(to left,transparent,black,transparent)}.sphere .axis+.axis{transform:rotateX(90deg)}
 @keyframes rotate{0%{transform:rotateX(30deg) rotateY(0deg) rotateZ(80deg)}100%{transform:rotateX(30deg) rotateY(360deg) rotateZ(80deg)}}
+
+/* projects section header */
+.projects-header{padding:4rem 3rem 2rem;display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid #e0e0e0}
+.projects-header h3{font-family:'EB Garamond',serif;font-size:1rem;font-weight:400;letter-spacing:.08em}
+.projects-header span{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#aaa}
+
+/* projects grid */
+#projects{display:grid;grid-template-columns:1fr 1fr;gap:3px;padding:0 3px 3px}
+.project{height:60svh;position:relative;display:flex;align-items:flex-end;overflow:hidden;opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.project.visible{opacity:1;transform:translateY(0)}
+.project-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .7s cubic-bezier(0.25,0.46,0.45,0.94)}
+.project:hover .project-bg{transform:scale(1.05)}
+.project-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 55%)}
+.project-info{position:relative;z-index:2;padding:2rem;color:#fff;display:block;width:100%}
+.project-info .num{font-size:.65rem;letter-spacing:.18em;opacity:.5;margin-bottom:.6rem;display:block}
+.project-info h2{font-family:'EB Garamond',serif;font-size:clamp(1.4rem,2.5vw,2.4rem);font-weight:400;line-height:1.05;margin-bottom:.6rem}
+.project-info .meta{display:flex;gap:1rem;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;opacity:.65}
+.project-arrow{position:absolute;bottom:2rem;right:2rem;width:36px;height:36px;border:1px solid rgba(255,255,255,0.4);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;opacity:0;transform:translate(4px,-4px);transition:opacity .3s ease,transform .3s ease}
+.project:hover .project-arrow{opacity:1;transform:translate(0,0)}
+
+/* footer */
+footer{padding:3rem;border-top:1px solid #ddd;display:flex;justify-content:space-between;align-items:center;font-size:.75rem;color:#999;margin-top:3px}
+footer a{color:#999}
+
+/* mobile */
+@media(max-width:768px){
+  *,*::before,*::after,html,body,a,button,input{cursor:auto !important}
+  nav{padding:1.2rem 1.5rem}
+  nav ul{gap:1.2rem}
+  .hero{padding:0 1.5rem 3rem}
+  .hero-name{font-size:clamp(3.5rem,18vw,6rem)}
+  .hero-sub{flex-direction:column;align-items:flex-start;gap:.8rem}
+  .scroll-hint{display:none}
+  .hero-top{display:none}
+  #projects{grid-template-columns:1fr;gap:2px;padding:0 2px 2px}
+  .project{height:70svh}
+  .projects-header{padding:3rem 1.5rem 1.5rem}
+  footer{padding:2rem 1.5rem;flex-direction:column;gap:.8rem;align-items:flex-start}
+}
 </style>
 </head>
 <body>
@@ -99,6 +137,7 @@ footer{padding:3rem;border-top:1px solid #ddd;display:flex;justify-content:space
   </div>
   <div class="hero-sub">
     <p>Industrial designer based in London.<br>"Form, function & process" according to my AI lol.</p>
+    <span class="scroll-hint">Scroll to explore</span>
   </div>
 </section>
 
@@ -110,7 +149,12 @@ footer{padding:3rem;border-top:1px solid #ddd;display:flex;justify-content:space
   <img src="/about-3.jpg" alt="" />
 </section>
 
-<div id="projects">
+<div class="projects-header" id="projects">
+  <h3>Selected Work</h3>
+  <span>07 Projects</span>
+</div>
+
+<div id="projects-grid">
   <a href="/projects/cycling-awareness-system" class="project">
     <div class="project-bg" style="background-image:url('/cas-cover.jpeg')"></div>
     <div class="project-overlay"></div>
@@ -119,6 +163,7 @@ footer{padding:3rem;border-top:1px solid #ddd;display:flex;justify-content:space
       <h2>Cycling Awareness System</h2>
       <div class="meta"><span>Road Safety</span><span>2025</span></div>
     </div>
+    <span class="project-arrow">↗</span>
   </a>
   <a href="/projects/flooding-assistance-vehicle" class="project">
     <div class="project-bg" style="background-image:url('/fav-cover.png')"></div>
@@ -128,6 +173,7 @@ footer{padding:3rem;border-top:1px solid #ddd;display:flex;justify-content:space
       <h2>Flooding Assistance Vehicle</h2>
       <div class="meta"><span>Micromobility</span><span>2025</span></div>
     </div>
+    <span class="project-arrow">↗</span>
   </a>
   <a href="/projects/swiftlift" class="project">
     <div class="project-bg" style="background-image:url('/swiftlift-cover.png')"></div>
@@ -137,6 +183,7 @@ footer{padding:3rem;border-top:1px solid #ddd;display:flex;justify-content:space
       <h2>SwiftLift</h2>
       <div class="meta"><span>Entrepreneurship</span><span>2025</span></div>
     </div>
+    <span class="project-arrow">↗</span>
   </a>
   <a href="/projects/bed" class="project">
     <div class="project-bg" style="background-image:url('/bed-cover.jpg')"></div>
@@ -146,6 +193,7 @@ footer{padding:3rem;border-top:1px solid #ddd;display:flex;justify-content:space
       <h2>How to Make a Bed</h2>
       <div class="meta"><span>Entrepreneurship</span><span>2024</span></div>
     </div>
+    <span class="project-arrow">↗</span>
   </a>
   <a href="/projects/f1-tour" class="project">
     <div class="project-bg" style="background-image:url('/fcover.png')"></div>
@@ -155,6 +203,7 @@ footer{padding:3rem;border-top:1px solid #ddd;display:flex;justify-content:space
       <h2>Autonomous F1 Vehicle</h2>
       <div class="meta"><span>Automotive Design</span><span>2026</span></div>
     </div>
+    <span class="project-arrow">↗</span>
   </a>
   <a href="/projects/habitapp" class="project">
     <div class="project-bg" style="background-image:url('/habitapp1.png')"></div>
@@ -164,6 +213,7 @@ footer{padding:3rem;border-top:1px solid #ddd;display:flex;justify-content:space
       <h2>HabitApp</h2>
       <div class="meta"><span>App Design</span><span>2023</span></div>
     </div>
+    <span class="project-arrow">↗</span>
   </a>
   <a href="/projects/x-falcon" class="project">
     <div class="project-bg" style="background-image:url('/xf1.png')"></div>
@@ -173,6 +223,7 @@ footer{padding:3rem;border-top:1px solid #ddd;display:flex;justify-content:space
       <h2>X-Falcon</h2>
       <div class="meta"><span>Industrial Design</span><span>2026</span></div>
     </div>
+    <span class="project-arrow">↗</span>
   </a>
 </div>
 
@@ -182,6 +233,7 @@ footer{padding:3rem;border-top:1px solid #ddd;display:flex;justify-content:space
 </footer>
 
 <script>
+// custom cursor (desktop only)
 const cursor = document.getElementById('cursor') as HTMLElement;
 const follower = document.getElementById('follower') as HTMLElement;
 let mouseX = 0, mouseY = 0;
@@ -208,6 +260,7 @@ document.querySelectorAll('a, .project').forEach(el => {
   el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
 });
 
+// page transition
 document.querySelectorAll('a[href^="/projects"]').forEach(link => {
   link.addEventListener('click', e => {
     e.preventDefault();
@@ -218,6 +271,11 @@ document.querySelectorAll('a[href^="/projects"]').forEach(link => {
   });
 });
 
+// move grid styles to the actual grid container
+const grid = document.getElementById('projects-grid') as HTMLElement;
+grid.style.cssText = grid.style.cssText; // trigger repaint if needed
+
+// loader
 window.addEventListener('load', () => {
   document.body.style.opacity = '1';
   setTimeout(() => {
@@ -225,11 +283,32 @@ window.addEventListener('load', () => {
   }, 300);
 });
 
+// hero blur on scroll
 const hero = document.getElementById('hero') as HTMLElement;
 window.addEventListener('scroll', () => {
   hero.classList.toggle('blurred', window.scrollY > 80);
 });
+
+// scroll-in animation for project cards
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.project').forEach((el, i) => {
+  (el as HTMLElement).style.transitionDelay = `${(i % 2) * 80}ms`;
+  observer.observe(el);
+});
 </script>
+
+<style>
+#projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;padding:0 3px 3px}
+@media(max-width:768px){#projects-grid{grid-template-columns:1fr;gap:2px;padding:0 2px 2px}}
+</style>
 
 </body>
 </html>
