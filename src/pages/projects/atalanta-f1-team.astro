@@ -4,15 +4,11 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>HabitApp — Nicolas Joannes</title>
+<title>Atalanta F1 Team — Nicolas Joannes</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&family=Inter:wght@300;400&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-*,*::before,*::after,html,body,a,button,input{cursor:none !important}
 body{font-family:'Inter',sans-serif;background:#f7f6f3;color:#1a1a1a}
-.cursor{position:fixed;width:8px;height:8px;background:#1a1a1a;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s ease}
-.cursor-follower{position:fixed;width:32px;height:32px;border:1px solid rgba(26,26,26,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%)}
-.cursor.expand{transform:translate(-50%,-50%) scale(3);opacity:.3}
 nav{position:fixed;top:0;left:0;width:100%;padding:2rem 3rem;display:flex;justify-content:space-between;z-index:100;background:#f7f6f3}
 nav a{text-decoration:none;color:#1a1a1a;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;opacity:.5}
 nav a:hover{opacity:1}
@@ -21,7 +17,7 @@ nav a:hover{opacity:1}
 .meta-item span{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:#999;display:block;margin-bottom:.4rem}
 .meta-item p{font-size:.9rem}
 h1{font-family:'EB Garamond',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:400;line-height:1.1;margin-bottom:3rem}
-.slide{width:100%;display:block;margin:2rem 0;border-radius:4px;transition:transform 0.3s ease,box-shadow 0.3s ease}
+.slide{width:100%;display:block;margin:2rem 0;border-radius:4px;object-fit:contain;transition:transform 0.3s ease,box-shadow 0.3s ease;cursor:zoom-in}
 .slide:hover{transform:scale(1.02);box-shadow:0 20px 60px rgba(0,0,0,0.12)}
 footer{padding:3rem;border-top:1px solid #ddd;display:flex;justify-content:space-between;font-size:.75rem;color:#999}
 footer a{color:#999;text-decoration:none}
@@ -30,10 +26,20 @@ footer a{color:#999;text-decoration:none}
 #lightbox img{max-width:90vw;max-height:90vh;object-fit:contain}
 </style>
 </head>
+<script>
+document.querySelectorAll('.slide').forEach(el => {
+  const img = el as HTMLElement;
+  img.addEventListener('mouseenter', () => {
+    img.style.transform = 'scale(1.02)';
+    img.style.boxShadow = '0 20px 60px rgba(0,0,0,0.12)';
+  });
+  img.addEventListener('mouseleave', () => {
+    img.style.transform = 'scale(1)';
+    img.style.boxShadow = 'none';
+  });
+});
+</script>
 <body>
-
-<div class="cursor" id="cursor"></div>
-<div class="cursor-follower" id="follower"></div>
 
 <nav>
   <a href="/">← Back</a>
@@ -42,49 +48,27 @@ footer a{color:#999;text-decoration:none}
 
 <div class="content">
   <div class="meta">
-    <div class="meta-item"><span>Category</span><p>App Design</p></div>
-    <div class="meta-item"><span>Year</span><p>2023</p></div>
-    <div class="meta-item"><span>Type</span><p>UX/UI Design</p></div>
+    <div class="meta-item"><span>Category</span><p>Automotive Design</p></div>
+    <div class="meta-item"><span>Year</span><p>2026</p></div>
+    <div class="meta-item"><span>Type</span><p>Brand & Vehicle Design</p></div>
   </div>
 
-  <h1>HabitApp</h1>
+  <h1>Atalanta F1 Team</h1>
 
-  <img class="slide" src="/habitapp1.png" alt="HabitApp slide 1" />
-  <img class="slide" src="/habitapp2.png" alt="HabitApp slide 2" />
-  <img class="slide" src="/habitapp3.png" alt="HabitApp slide 3" />
-  <img class="slide" src="/habitapp4.png" alt="HabitApp slide 4" />
-  <img class="slide" src="/habitapp5.png" alt="HabitApp slide 5" />
+  <img class="slide" src="/A1.png" alt="Atalanta F1 Team 1" />
+  <img class="slide" src="/A2.png" alt="Atalanta F1 Team 2" />
+  <img class="slide" src="/A3.png" alt="Atalanta F1 Team 3" />
+  <img class="slide" src="/A4.png" alt="Atalanta F1 Team 4" />
+  <img class="slide" src="/A5.png" alt="Atalanta F1 Team 5" />
+  <img class="slide" src="/A6.png" alt="Atalanta F1 Team 6" />
+  <img class="slide" src="/A7.png" alt="Atalanta F1 Team 7" />
+  <img class="slide" src="/A8.png" alt="Atalanta F1 Team 8" />
 </div>
 
 <footer>
   <span>© 2026 Nicolas Joannes</span>
   <a href="/">← All projects</a>
 </footer>
-
-<script>
-const cursor = document.getElementById('cursor') as HTMLElement;
-const follower = document.getElementById('follower') as HTMLElement;
-let mouseX = 0, mouseY = 0;
-let followerX = 0, followerY = 0;
-document.addEventListener('mousemove', e => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-  cursor.style.left = mouseX + 'px';
-  cursor.style.top = mouseY + 'px';
-});
-function animateFollower() {
-  followerX += (mouseX - followerX) * 0.15;
-  followerY += (mouseY - followerY) * 0.15;
-  follower.style.left = followerX + 'px';
-  follower.style.top = followerY + 'px';
-  requestAnimationFrame(animateFollower);
-}
-animateFollower();
-document.querySelectorAll('a').forEach(el => {
-  el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
-  el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
-});
-</script>
 
 <div id="lightbox"><img id="lightbox-img" src="" alt="" /></div>
 <script>

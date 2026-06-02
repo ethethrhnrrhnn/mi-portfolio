@@ -21,6 +21,9 @@ h1{font-family:'EB Garamond',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:
 .slide:hover{transform:scale(1.02);box-shadow:0 20px 60px rgba(0,0,0,0.12)}
 footer{padding:3rem;border-top:1px solid #ddd;display:flex;justify-content:space-between;font-size:.75rem;color:#999}
 footer a{color:#999;text-decoration:none}
+#lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.92);display:flex;align-items:center;justify-content:center;z-index:1000;opacity:0;pointer-events:none;transition:opacity .3s ease;cursor:zoom-out}
+#lightbox.open{opacity:1;pointer-events:auto}
+#lightbox img{max-width:90vw;max-height:90vh;object-fit:contain}
 </style>
 </head>
 <script>
@@ -66,5 +69,22 @@ document.querySelectorAll('.slide').forEach(el => {
   <a href="/">← All projects</a>
 </footer>
 
+<div id="lightbox"><img id="lightbox-img" src="" alt="" /></div>
+<script>
+const lb = document.getElementById('lightbox') as HTMLElement;
+const lbImg = document.getElementById('lightbox-img') as HTMLImageElement;
+const slides = Array.from(document.querySelectorAll('.slide')) as HTMLImageElement[];
+let lbIndex = 0;
+slides.forEach((el, i) => {
+  el.addEventListener('click', () => { lbIndex = i; lbImg.src = el.src; lb.classList.add('open'); });
+});
+lb.addEventListener('click', () => lb.classList.remove('open'));
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { lb.classList.remove('open'); return; }
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'ArrowRight') { lbIndex = (lbIndex + 1) % slides.length; lbImg.src = slides[lbIndex].src; }
+  if (e.key === 'ArrowLeft') { lbIndex = (lbIndex - 1 + slides.length) % slides.length; lbImg.src = slides[lbIndex].src; }
+});
+</script>
 </body>
 </html>
