@@ -1,0 +1,163 @@
+---
+---
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Work — Nicolas Joannes</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&family=Inter:wght@300;400&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+*,*::before,*::after,html,body,a,button,input{cursor:none !important}
+body{font-family:'Inter',sans-serif;background:#f7f6f3;color:#1a1a1a}
+@media(hover:none){*,*::before,*::after,html,body,a,button,input{cursor:auto !important}}
+
+/* cursor */
+.cursor{position:fixed;width:8px;height:8px;background:#1a1a1a;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s ease}
+.cursor-follower{position:fixed;width:32px;height:32px;border:1px solid rgba(26,26,26,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .08s ease,top .08s ease}
+.cursor.expand{transform:translate(-50%,-50%) scale(3);opacity:.3}
+
+/* nav */
+nav{position:fixed;top:0;left:0;width:100%;padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center;z-index:100;background:#f7f6f3}
+nav .logo{font-size:.75rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;color:#1a1a1a}
+a{text-decoration:none}
+nav ul{list-style:none;display:flex;gap:2rem}
+nav ul a{color:#1a1a1a;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;opacity:.5;transition:opacity .2s}
+nav ul a:hover{opacity:1}
+
+/* grid */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem;padding:8rem 3rem 6rem}
+.card{display:block;color:#1a1a1a}
+.card-img{width:100%;aspect-ratio:4/3;background-size:cover;background-position:center;overflow:hidden;transition:opacity .3s ease}
+.card:hover .card-img{opacity:.85}
+.card-info{display:flex;justify-content:space-between;align-items:center;padding:.8rem 0 0}
+.card-title{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
+.card-date{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;opacity:.35}
+
+@media(max-width:768px){
+  *,*::before,*::after,html,body,a,button,input{cursor:auto !important}
+  nav{padding:1.2rem 1.5rem}
+  nav ul{gap:1.2rem}
+  .grid{grid-template-columns:1fr;gap:2rem;padding:6rem 1.5rem 4rem}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="follower"></div>
+
+<nav>
+  <a class="logo" href="/">Nicolas Joannes</a>
+  <ul>
+    <li><a href="/work">Work</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="grid">
+  <a href="/projects/calder-chair" class="card">
+    <div class="card-img" style="background-image:url('/c1.png')"></div>
+    <div class="card-info">
+      <span class="card-title">Calder Chair</span>
+      <span class="card-date">2026</span>
+    </div>
+  </a>
+  <a href="/projects/atalanta-f1-team" class="card">
+    <div class="card-img" style="background-image:url('/A3.png')"></div>
+    <div class="card-info">
+      <span class="card-title">Atalanta F1 Team</span>
+      <span class="card-date">2026</span>
+    </div>
+  </a>
+  <a href="/projects/cycling-awareness-system" class="card">
+    <div class="card-img" style="background-image:url('/cas-cover.jpeg')"></div>
+    <div class="card-info">
+      <span class="card-title">Cycling Awareness System</span>
+      <span class="card-date">2025</span>
+    </div>
+  </a>
+  <a href="/projects/flooding-assistance-vehicle" class="card">
+    <div class="card-img" style="background-image:url('/fav-cover.png')"></div>
+    <div class="card-info">
+      <span class="card-title">Flooding Assistance Vehicle</span>
+      <span class="card-date">2025</span>
+    </div>
+  </a>
+  <a href="/projects/swiftlift" class="card">
+    <div class="card-img" style="background-image:url('/swiftlift-cover.png')"></div>
+    <div class="card-info">
+      <span class="card-title">SwiftLift</span>
+      <span class="card-date">2025</span>
+    </div>
+  </a>
+  <a href="/projects/bed" class="card">
+    <div class="card-img" style="background-image:url('/bed-cover.jpg')"></div>
+    <div class="card-info">
+      <span class="card-title">How to Make a Bed</span>
+      <span class="card-date">2024</span>
+    </div>
+  </a>
+  <a href="/projects/f1-tour" class="card">
+    <div class="card-img" style="background-image:url('/fcover.png')"></div>
+    <div class="card-info">
+      <span class="card-title">Autonomous F1 Vehicle</span>
+      <span class="card-date">2026</span>
+    </div>
+  </a>
+  <a href="/projects/habitapp" class="card">
+    <div class="card-img" style="background-image:url('/habitapp1.png')"></div>
+    <div class="card-info">
+      <span class="card-title">HabitApp</span>
+      <span class="card-date">2023</span>
+    </div>
+  </a>
+  <a href="/projects/x-falcon" class="card">
+    <div class="card-img" style="background-image:url('/xf1.png')"></div>
+    <div class="card-info">
+      <span class="card-title">X-Falcon</span>
+      <span class="card-date">2026</span>
+    </div>
+  </a>
+</div>
+
+<script>
+const cursor = document.getElementById('cursor') as HTMLElement;
+const follower = document.getElementById('follower') as HTMLElement;
+let mouseX = 0, mouseY = 0, followerX = 0, followerY = 0;
+
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX; mouseY = e.clientY;
+  cursor.style.left = mouseX + 'px';
+  cursor.style.top = mouseY + 'px';
+});
+function animateFollower() {
+  followerX += (mouseX - followerX) * 0.15;
+  followerY += (mouseY - followerY) * 0.15;
+  follower.style.left = followerX + 'px';
+  follower.style.top = followerY + 'px';
+  requestAnimationFrame(animateFollower);
+}
+animateFollower();
+
+document.querySelectorAll('a').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
+});
+
+document.querySelectorAll('a[href^="/projects"]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const href = (link as HTMLAnchorElement).getAttribute('href') as string;
+    document.body.style.transition = 'opacity .4s ease';
+    document.body.style.opacity = '0';
+    setTimeout(() => { window.location.href = href; }, 400);
+  });
+});
+
+window.addEventListener('load', () => { document.body.style.opacity = '1'; });
+</script>
+
+</body>
+</html>
