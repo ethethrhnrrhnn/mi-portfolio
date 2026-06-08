@@ -31,8 +31,9 @@ nav ul a:hover{opacity:1}
 /* slideshow */
 #slideshow-wrap{margin:7rem 3rem 4rem}
 #slideshow{position:relative;height:70svh;overflow:hidden}
-.slide{position:absolute;inset:0;background-size:contain;background-position:center;background-repeat:no-repeat;opacity:0;transition:opacity 1.2s ease,background-position .6s ease-out;display:block;pointer-events:none}
-.slide.active{opacity:1;pointer-events:auto}
+#slide-track{display:flex;height:100%;transition:transform .7s cubic-bezier(0.68,-0.55,0.265,1.55);will-change:transform}
+.slide{flex-shrink:0;background-size:contain;background-position:center;background-repeat:no-repeat;display:block;height:100%;pointer-events:none}
+.slide.active{pointer-events:auto}
 #slide-caption{display:flex;justify-content:space-between;align-items:center;padding:1.8rem 0 0;gap:4rem}
 #slide-title{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:#1a1a1a;opacity:.6}
 #slide-date{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:#1a1a1a;opacity:.35}
@@ -69,15 +70,17 @@ nav ul a:hover{opacity:1}
   <div id="slideshow">
     <button class="slide-nav" id="prev-btn">←</button>
     <button class="slide-nav" id="next-btn">→</button>
-    <a href="/projects/calder-chair" class="slide active" data-title="Calder Chair" data-date="2026" style="background-image:url('/c1.png')"></a>
-    <a href="/projects/atalanta-f1-team" class="slide" data-title="Atalanta F1 Team" data-date="2026" style="background-image:url('/A3.png')"></a>
-    <a href="/projects/cycling-awareness-system" class="slide" data-title="Cycling Awareness System" data-date="2025" style="background-image:url('/cas-cover.png')"></a>
-    <a href="/projects/flooding-assistance-vehicle" class="slide" data-title="Flooding Assistance Vehicle" data-date="2025" style="background-image:url('/fav-cover1.png')"></a>
-    <a href="/projects/swiftlift" class="slide" data-title="SwiftLift" data-date="2025" style="background-image:url('/swiftlift-cover.png')"></a>
-    <a href="/projects/bed" class="slide" data-title="How to Make a Bed" data-date="2024" style="background-image:url('/bed-cover.jpg')"></a>
-    <a href="/projects/f1-tour" class="slide" data-title="Autonomous F1 Vehicle" data-date="2026" style="background-image:url('/f1cover1.png')"></a>
-    <a href="/projects/habitapp" class="slide" data-title="HabitApp" data-date="2023" style="background-image:url('/habitapp1.png')"></a>
-    <a href="/projects/x-falcon" class="slide" data-title="X-Falcon" data-date="2026" style="background-image:url('/xf-cover.png')"></a>
+    <div id="slide-track">
+      <a href="/projects/calder-chair" class="slide active" data-title="Calder Chair" data-date="2026" style="background-image:url('/c1.png')"></a>
+      <a href="/projects/atalanta-f1-team" class="slide" data-title="Atalanta F1 Team" data-date="2026" style="background-image:url('/A3.png')"></a>
+      <a href="/projects/cycling-awareness-system" class="slide" data-title="Cycling Awareness System" data-date="2025" style="background-image:url('/cas-cover.png')"></a>
+      <a href="/projects/flooding-assistance-vehicle" class="slide" data-title="Flooding Assistance Vehicle" data-date="2025" style="background-image:url('/fav-cover1.png')"></a>
+      <a href="/projects/swiftlift" class="slide" data-title="SwiftLift" data-date="2025" style="background-image:url('/swiftlift-cover.png')"></a>
+      <a href="/projects/bed" class="slide" data-title="How to Make a Bed" data-date="2024" style="background-image:url('/bed-cover.jpg')"></a>
+      <a href="/projects/f1-tour" class="slide" data-title="Autonomous F1 Vehicle" data-date="2026" style="background-image:url('/f1cover1.png')"></a>
+      <a href="/projects/habitapp" class="slide" data-title="HabitApp" data-date="2023" style="background-image:url('/habitapp1.png')"></a>
+      <a href="/projects/x-falcon" class="slide" data-title="X-Falcon" data-date="2026" style="background-image:url('/xf-cover.png')"></a>
+    </div>
   </div>
   <div id="slide-caption">
     <span id="slide-title">Calder Chair</span>
@@ -131,10 +134,16 @@ window.addEventListener('load', () => {
 
 // slideshow
 const slides = document.querySelectorAll('.slide');
+const slideTrack = document.getElementById('slide-track') as HTMLElement;
 const slideTitle = document.getElementById('slide-title') as HTMLElement;
 const slideDate = document.getElementById('slide-date') as HTMLElement;
 let current = 0;
 let timer: ReturnType<typeof setInterval>;
+
+// size the track and each slide dynamically
+const count = slides.length;
+slideTrack.style.width = (count * 100) + '%';
+slides.forEach(s => { (s as HTMLElement).style.width = (100 / count) + '%'; });
 
 function updateCaption(i: number) {
   const s = slides[i] as HTMLElement;
@@ -145,8 +154,9 @@ function updateCaption(i: number) {
 function goTo(i: number) {
   (slides[current] as HTMLElement).style.backgroundPosition = 'center';
   slides[current].classList.remove('active');
-  current = ((i % slides.length) + slides.length) % slides.length;
+  current = ((i % count) + count) % count;
   slides[current].classList.add('active');
+  slideTrack.style.transform = `translateX(-${current * (100 / count)}%)`;
   updateCaption(current);
 }
 
@@ -155,12 +165,11 @@ slideshowEl.addEventListener('mousemove', e => {
   const rect = slideshowEl.getBoundingClientRect();
   const dx = (e.clientX - rect.left - rect.width / 2) / rect.width * 4;
   const dy = (e.clientY - rect.top - rect.height / 2) / rect.height * 4;
-  const active = slideshowEl.querySelector('.slide.active') as HTMLElement;
-  if (active) active.style.backgroundPosition = `calc(50% + ${dx}px) calc(50% + ${dy}px)`;
+  const active = slides[current] as HTMLElement;
+  active.style.backgroundPosition = `calc(50% + ${dx}px) calc(50% + ${dy}px)`;
 });
 slideshowEl.addEventListener('mouseleave', () => {
-  const active = slideshowEl.querySelector('.slide.active') as HTMLElement;
-  if (active) active.style.backgroundPosition = 'center';
+  (slides[current] as HTMLElement).style.backgroundPosition = 'center';
 });
 
 function startTimer() {
