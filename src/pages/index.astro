@@ -153,7 +153,6 @@ function updateCaption(i: number) {
 }
 
 function goTo(i: number) {
-  (slides[current] as HTMLElement).style.backgroundPosition = 'center';
   slides[current].classList.remove('active');
   current = ((i % count) + count) % count;
   slides[current].classList.add('active');
@@ -161,17 +160,6 @@ function goTo(i: number) {
   updateCaption(current);
 }
 
-const slideshowEl = document.getElementById('slideshow') as HTMLElement;
-slideshowEl.addEventListener('mousemove', e => {
-  const rect = slideshowEl.getBoundingClientRect();
-  const dx = (e.clientX - rect.left - rect.width / 2) / rect.width * 4;
-  const dy = (e.clientY - rect.top - rect.height / 2) / rect.height * 4;
-  const active = slides[current] as HTMLElement;
-  active.style.backgroundPosition = `calc(50% + ${dx}px) calc(50% + ${dy}px)`;
-});
-slideshowEl.addEventListener('mouseleave', () => {
-  (slides[current] as HTMLElement).style.backgroundPosition = 'center';
-});
 
 function startTimer() {
   clearInterval(timer);
