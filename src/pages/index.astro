@@ -38,10 +38,6 @@ nav ul a:hover{opacity:1}
 #slide-caption{display:flex;justify-content:space-between;align-items:center;padding:1.8rem 0 0;gap:4rem}
 #slide-title{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:#1a1a1a;opacity:.6}
 #slide-date{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:#1a1a1a;opacity:.35}
-.slide-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:10;background:none;border:none;padding:.5rem 1.2rem;color:#1a1a1a;opacity:.25;font-size:1.4rem;transition:opacity .2s;pointer-events:auto}
-.slide-nav:hover{opacity:.7}
-#prev-btn{left:0}
-#next-btn{right:0}
 
 /* mobile */
 @media(max-width:768px){
@@ -70,8 +66,6 @@ nav ul a:hover{opacity:1}
 
 <div id="slideshow-wrap">
   <div id="slideshow">
-    <button class="slide-nav" id="prev-btn">←</button>
-    <button class="slide-nav" id="next-btn">→</button>
     <div id="slide-track">
       <a href="/projects/calder-chair" class="slide active" data-title="Calder Chair" data-date="2026" style="background-image:url('/c1.png')"></a>
       <a href="/projects/atalanta-f1-team" class="slide" data-title="Atalanta F1 Team" data-date="2026" style="background-image:url('/A3.png')"></a>
@@ -140,9 +134,8 @@ const slideTrack = document.getElementById('slide-track') as HTMLElement;
 const slideTitle = document.getElementById('slide-title') as HTMLElement;
 const slideDate = document.getElementById('slide-date') as HTMLElement;
 let current = 0;
-let timer: ReturnType<typeof setInterval>;
+let isAnimating = false;
 
-// size the track and each slide dynamically
 const count = slides.length;
 slideTrack.style.width = (count * 100) + '%';
 slides.forEach(s => { (s as HTMLElement).style.width = (100 / count) + '%'; });
@@ -161,25 +154,33 @@ function goTo(i: number) {
   updateCaption(current);
 }
 
+// scroll interaction
+window.addEventListener('wheel', (e: WheelEvent) => {
+  e.preventDefault();
+  if (isAnimating) return;
+  const dir = e.deltaY > 0 ? 1 : -1;
+  const next = current + dir;
+  if (next < 0 || next >= count) return;
+  isAnimating = true;
+  goTo(next);
+  setTimeout(() => { isAnimating = false; }, 750);
+}, { passive: false });
 
-function startTimer() {
-  clearInterval(timer);
-  timer = setInterval(() => goTo(current + 1), 4000);
-}
-
-document.getElementById('prev-btn')!.addEventListener('click', e => {
-  e.stopPropagation();
-  goTo(current - 1);
-  startTimer();
-});
-
-document.getElementById('next-btn')!.addEventListener('click', e => {
-  e.stopPropagation();
-  goTo(current + 1);
-  startTimer();
-});
-
-startTimer();
+// touch/swipe interaction
+let touchStartY = 0;
+window.addEventListener('touchstart', (e: TouchEvent) => {
+  touchStartY = e.touches[0].clientY;
+}, { passive: true });
+window.addEventListener('touchend', (e: TouchEvent) => {
+  if (isAnimating) return;
+  const dy = touchStartY - e.changedTouches[0].clientY;
+  if (Math.abs(dy) < 40) return;
+  const next = current + (dy > 0 ? 1 : -1);
+  if (next < 0 || next >= count) return;
+  isAnimating = true;
+  goTo(next);
+  setTimeout(() => { isAnimating = false; }, 750);
+}, { passive: true });
 </script>
 
 
