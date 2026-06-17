@@ -7,41 +7,51 @@
 <link rel="icon" type="image/png" href="/earth.png" />
 <title>Work — Nicolas Joannes</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-*,*::before,*::after,html,body,a,button,input{cursor:none !important}
-body{font-family:'Inter',sans-serif;background:#f7f6f3;color:#1a1a1a}
-@media(hover:none){*,*::before,*::after,html,body,a,button,input{cursor:auto !important}}
+*,*::before,*::after,html,body,a,button{cursor:none !important}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:#0c0c0c;background:#f8f8f6;opacity:0;transition:opacity .5s ease;overflow-x:hidden}
+@media(hover:none){*,*::before,*::after,html,body,a,button{cursor:auto !important}}
 
-/* cursor */
-.cursor{position:fixed;width:8px;height:8px;background:#1a1a1a;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s ease}
-.cursor-follower{position:fixed;width:32px;height:32px;border:1px solid rgba(26,26,26,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .08s ease,top .08s ease}
-.cursor.expand{transform:translate(-50%,-50%) scale(3);opacity:.3}
+.cursor{position:fixed;width:8px;height:8px;background:#fff;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s ease;mix-blend-mode:difference}
+.cursor-follower{position:fixed;width:36px;height:36px;border:1px solid #fff;border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .1s ease,top .1s ease;mix-blend-mode:difference}
+.cursor.expand{transform:translate(-50%,-50%) scale(2.5);opacity:.5}
+@media(hover:none){.cursor,.cursor-follower{display:none}}
 
-/* nav */
-nav{position:fixed;top:0;left:0;width:100%;padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center;z-index:100}
-nav .logo{font-size:.75rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;color:#1a1a1a}
+nav{position:fixed;top:0;left:0;width:100%;padding:1.8rem 3rem;display:flex;justify-content:space-between;align-items:center;z-index:200;mix-blend-mode:difference}
+.logo{font-size:.7rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#fff;text-decoration:none}
 a{text-decoration:none}
-nav ul{list-style:none;display:flex;gap:2rem}
-nav ul a{color:#1a1a1a;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;opacity:.5;transition:opacity .2s}
+nav ul{list-style:none;display:flex;gap:2.5rem}
+nav ul a{color:#fff;font-size:.65rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;opacity:.65;transition:opacity .2s}
 nav ul a:hover{opacity:1}
 
-/* grid */
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem;padding:8rem 3rem 6rem}
-.card{display:block;color:#1a1a1a}
-.card-img{width:100%;aspect-ratio:4/3;background-size:cover;background-position:center;overflow:hidden;transition:opacity .3s ease}
-.card:hover .card-img{opacity:.85}
-.card-info{display:flex;justify-content:space-between;align-items:center;padding:.8rem 0 0}
-.card-title{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
-.card-date{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;opacity:.35}
+/* page header */
+.page-header{padding:8rem 3rem 4rem;border-bottom:1px solid rgba(12,12,12,0.07)}
+.page-header-label{font-size:.62rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:rgba(12,12,12,0.32);display:block;margin-bottom:1.5rem}
+.page-header h1{font-size:clamp(3.5rem,7vw,6.5rem);font-weight:700;letter-spacing:-.04em;line-height:.92;color:#0c0c0c}
+
+/* card grid */
+.work-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;padding:1.5rem 3rem 7rem}
+.card{display:block;color:inherit;overflow:hidden}
+.card-image{width:100%;aspect-ratio:3/2;overflow:hidden}
+.card-image-inner{width:100%;height:100%;background-size:cover;background-position:center;background-repeat:no-repeat;transition:transform .85s cubic-bezier(0.25,0.46,0.45,0.94)}
+.card:hover .card-image-inner{transform:scale(1.05)}
+.card-info{padding:.9rem 0 0}
+.card-category{display:block;font-size:.58rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(12,12,12,0.36);margin-bottom:.38rem}
+.card-title{display:block;font-size:1rem;font-weight:500;letter-spacing:-.01em;color:#0c0c0c;transition:color .25s}
+.card:hover .card-title{color:rgba(12,12,12,0.42)}
+
+/* scroll reveal */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(0.25,0.46,0.45,0.94),transform .9s cubic-bezier(0.25,0.46,0.45,0.94)}
+.reveal.visible{opacity:1;transform:translateY(0)}
 
 @media(max-width:768px){
-  *,*::before,*::after,html,body,a,button,input{cursor:auto !important}
-  nav{padding:1.2rem 1.5rem}
-  nav ul{gap:1.2rem}
-  .grid{grid-template-columns:1fr;gap:2rem;padding:6rem 1.5rem 4rem}
+  nav{padding:1.4rem 1.5rem}
+  nav ul{gap:1.5rem}
+  .page-header{padding:6rem 1.5rem 3rem}
+  .work-grid{grid-template-columns:1fr;gap:1rem;padding:1rem 1.5rem 5rem}
 }
-
 </style>
 </head>
 <body>
@@ -50,75 +60,80 @@ nav ul a:hover{opacity:1}
 <div class="cursor-follower" id="follower"></div>
 
 <nav>
-  <a class="logo" href="/">Nicolas Joannes</a>
+  <a href="/" class="logo">NJ</a>
   <ul>
     <li><a href="/work">Work</a></li>
-<li><a href="/contact">Contact</a></li>
+    <li><a href="/contact">Contact</a></li>
   </ul>
 </nav>
 
-<div class="grid">
-  <a href="/projects/calder-chair" class="card">
-    <div class="card-img" style="background-image:url('/c1.png')"></div>
+<div class="page-header reveal">
+  <span class="page-header-label">Portfolio</span>
+  <h1>Work</h1>
+</div>
+
+<div class="work-grid">
+  <a href="/projects/calder-chair" class="card reveal" style="transition-delay:0s">
+    <div class="card-image"><div class="card-image-inner" style="background-image:url('/c1.png')"></div></div>
     <div class="card-info">
+      <span class="card-category">Furniture Design — 2026</span>
       <span class="card-title">Calder Chair</span>
-      <span class="card-date">2026</span>
     </div>
   </a>
-  <a href="/projects/atalanta-f1-team" class="card">
-    <div class="card-img" style="background-image:url('/A3.png')"></div>
+  <a href="/projects/atalanta-f1-team" class="card reveal" style="transition-delay:.1s">
+    <div class="card-image"><div class="card-image-inner" style="background-image:url('/A3.png')"></div></div>
     <div class="card-info">
+      <span class="card-category">Automotive Design — 2026</span>
       <span class="card-title">Atalanta F1 Team</span>
-      <span class="card-date">2026</span>
     </div>
   </a>
-  <a href="/projects/f1-tour" class="card">
-    <div class="card-img" style="background-image:url('/f1cover1.png')"></div>
+  <a href="/projects/f1-tour" class="card reveal" style="transition-delay:.05s">
+    <div class="card-image"><div class="card-image-inner" style="background-image:url('/f1cover1.png')"></div></div>
     <div class="card-info">
+      <span class="card-category">Automotive Design — 2026</span>
       <span class="card-title">Autonomous F1 Vehicle</span>
-      <span class="card-date">2026</span>
     </div>
   </a>
-  <a href="/projects/x-falcon" class="card">
-    <div class="card-img" style="background-image:url('/xf-cover.png')"></div>
+  <a href="/projects/x-falcon" class="card reveal" style="transition-delay:.15s">
+    <div class="card-image"><div class="card-image-inner" style="background-image:url('/xf-cover.png')"></div></div>
     <div class="card-info">
+      <span class="card-category">Automotive Design — 2026</span>
       <span class="card-title">X-Falcon</span>
-      <span class="card-date">2026</span>
     </div>
   </a>
-  <a href="/projects/cycling-awareness-system" class="card">
-    <div class="card-img" style="background-image:url('/cas-cover.png')"></div>
+  <a href="/projects/cycling-awareness-system" class="card reveal" style="transition-delay:0s">
+    <div class="card-image"><div class="card-image-inner" style="background-image:url('/cas-cover.png')"></div></div>
     <div class="card-info">
+      <span class="card-category">Product Design — 2025</span>
       <span class="card-title">Cycling Awareness System</span>
-      <span class="card-date">2025</span>
     </div>
   </a>
-  <a href="/projects/flooding-assistance-vehicle" class="card">
-    <div class="card-img" style="background-image:url('/fav-cover1.png')"></div>
+  <a href="/projects/flooding-assistance-vehicle" class="card reveal" style="transition-delay:.1s">
+    <div class="card-image"><div class="card-image-inner" style="background-image:url('/fav-cover1.png')"></div></div>
     <div class="card-info">
+      <span class="card-category">Product Design — 2025</span>
       <span class="card-title">Flooding Assistance Vehicle</span>
-      <span class="card-date">2025</span>
     </div>
   </a>
-  <a href="/projects/swiftlift" class="card">
-    <div class="card-img" style="background-image:url('/swiftlift-cover.png')"></div>
+  <a href="/projects/swiftlift" class="card reveal" style="transition-delay:.05s">
+    <div class="card-image"><div class="card-image-inner" style="background-image:url('/swiftlift-cover.png')"></div></div>
     <div class="card-info">
+      <span class="card-category">Product Design — 2025</span>
       <span class="card-title">SwiftLift</span>
-      <span class="card-date">2025</span>
     </div>
   </a>
-  <a href="/projects/bed" class="card">
-    <div class="card-img" style="background-image:url('/bed-cover.jpg')"></div>
+  <a href="/projects/bed" class="card reveal" style="transition-delay:.15s">
+    <div class="card-image"><div class="card-image-inner" style="background-image:url('/bed-cover.jpg')"></div></div>
     <div class="card-info">
+      <span class="card-category">Product Design — 2024</span>
       <span class="card-title">How to Make a Bed</span>
-      <span class="card-date">2024</span>
     </div>
   </a>
-  <a href="/projects/habitapp" class="card">
-    <div class="card-img" style="background-image:url('/habitapp1.png')"></div>
+  <a href="/projects/habitapp" class="card reveal" style="transition-delay:0s">
+    <div class="card-image"><div class="card-image-inner" style="background-image:url('/habitapp1.png')"></div></div>
     <div class="card-info">
+      <span class="card-category">UX Design — 2023</span>
       <span class="card-title">HabitApp</span>
-      <span class="card-date">2023</span>
     </div>
   </a>
 </div>
@@ -147,6 +162,8 @@ document.querySelectorAll('a').forEach(el => {
   el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
 });
 
+window.addEventListener('load', () => { document.body.style.opacity = '1'; });
+
 document.querySelectorAll('a[href^="/projects"]').forEach(link => {
   link.addEventListener('click', e => {
     e.preventDefault();
@@ -157,7 +174,12 @@ document.querySelectorAll('a[href^="/projects"]').forEach(link => {
   });
 });
 
-window.addEventListener('load', () => { document.body.style.opacity = '1'; });
+const io = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) { entry.target.classList.add('visible'); io.unobserve(entry.target); }
+  });
+}, { threshold: 0.05 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
 
 </body>
