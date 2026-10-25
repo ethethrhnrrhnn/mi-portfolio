@@ -1,0 +1,146 @@
+---
+const projects = [
+  {
+    title: "Brick & Canvas",
+    tag: "Gallery analytics app — Figma prototype",
+    year: "2026",
+    cover: "/brick-canvas-cover.png",
+    href: "/projects/brick-and-canvas",
+  },
+  {
+    title: "HabitApp",
+    tag: "Behaviour change app",
+    year: "2025",
+    cover: "/habit-cover.png",
+    href: "/projects/habitapp",
+  },
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Digital Products — Nicolás Joannes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      body {
+        font-family: 'EB Garamond', Georgia, serif;
+        background: #f5f5f3;
+        color: #1a1a1a;
+      }
+
+      nav {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        display: flex;
+        justify-content: space-between;
+        padding: 1.5rem 2rem;
+        z-index: 10;
+        mix-blend-mode: difference;
+        color: #fff;
+      }
+      nav a { color: inherit; text-decoration: none; font-size: 1rem; }
+      nav ul { list-style: none; display: flex; gap: 2rem; }
+      nav a:hover { opacity: 0.6; }
+
+      .intro {
+        min-height: 60vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 0 2rem 4rem;
+      }
+      .intro h1 {
+        font-size: clamp(3rem, 8vw, 7rem);
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: -0.02em;
+      }
+      .intro h1 em { font-style: italic; }
+      .intro p {
+        margin-top: 1.5rem;
+        max-width: 520px;
+        font-size: 1.25rem;
+        line-height: 1.5;
+        color: #555;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .card {
+        position: relative;
+        display: block;
+        height: 100vh;
+        overflow: hidden;
+        color: #fff;
+        text-decoration: none;
+        background: #ddd;
+      }
+      .card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.8s ease;
+      }
+      .card:hover img { transform: scale(1.04); }
+
+      .card .meta {
+        position: absolute;
+        left: 2rem; right: 2rem; bottom: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        text-shadow: 0 1px 12px rgba(0,0,0,0.3);
+      }
+      .card h2 { font-size: 2rem; font-weight: 400; }
+      .card span { font-size: 1rem; font-style: italic; opacity: 0.9; }
+
+      @media (max-width: 768px) {
+        .grid { grid-template-columns: 1fr; }
+        .card { height: 75vh; }
+        nav ul { gap: 1rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="/">Nicolás Joannes</a>
+      <ul>
+        <li><a href="/">Work</a></li>
+        <li><a href="/digital-products">Digital</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <section class="intro">
+      <h1>Digital <em>products</em></h1>
+      <p>Apps, interfaces and prototypes, designed with behavioural science.</p>
+    </section>
+
+    <section class="grid">
+      {projects.map((p) => (
+        <a class="card" href={p.href}>
+          <img src={p.cover} alt={p.title} />
+          <div class="meta">
+            <div>
+              <h2>{p.title}</h2>
+              <span>{p.tag}</span>
+            </div>
+            <span>{p.year}</span>
+          </div>
+        </a>
+      ))}
+    </section>
+  </body>
+</html>
