@@ -83,6 +83,10 @@ nav ul li a:hover::before{transform:scale(1) translateY(0);opacity:1;border-radi
 .card-title{display:block;font-size:1rem;font-weight:500;letter-spacing:-.01em;color:#0c0c0c;transition:color .25s}
 .card:hover .card-title{color:rgba(12,12,12,0.42)}
 
+/* section header */
+.section-header{padding:3rem 3rem 0;border-top:1px solid rgba(12,12,12,0.07);scroll-margin-top:5rem}
+.section-header h2{font-size:clamp(2.4rem,4.6vw,4.2rem);font-weight:700;letter-spacing:-.04em;line-height:.95;color:#0c0c0c}
+
 /* scroll reveal */
 .reveal{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(0.25,0.46,0.45,0.94),transform .9s cubic-bezier(0.25,0.46,0.45,0.94)}
 .reveal.visible{opacity:1;transform:translateY(0)}
@@ -92,6 +96,7 @@ nav ul li a:hover::before{transform:scale(1) translateY(0);opacity:1;border-radi
   nav ul{gap:.15rem}
   .page-header{padding:6rem 1.5rem 3rem}
   .work-grid{grid-template-columns:1fr;gap:1rem;padding:1rem 1.5rem 5rem}
+  .section-header{padding:2.5rem 1.5rem 0}
 }
 </style>
 </head>
@@ -181,10 +186,25 @@ nav ul li a:hover::before{transform:scale(1) translateY(0);opacity:1;border-radi
       <span class="card-title">How to Make a Bed</span>
     </div>
   </a>
+</div>
+
+<div class="section-header reveal" id="digital-design">
+  <span class="page-header-label">Section</span>
+  <h2>Digital Design</h2>
+</div>
+
+<div class="work-grid">
+  <a href="/projects/brick-and-canvas" class="card reveal" style="transition-delay:0s">
+    <div class="card-image"><div class="card-image-inner" style="background-image:url('/brick-canvas-cover.svg')"></div></div>
+    <div class="card-info">
+      <span class="card-category">Digital Design — 2026</span>
+      <span class="card-title">Brick &amp; Canvas</span>
+    </div>
+  </a>
   <a href="/projects/habitapp" class="card reveal" style="transition-delay:.1s">
     <div class="card-image"><div class="card-image-inner" style="background-image:url('/habitapp1.png')"></div></div>
     <div class="card-info">
-      <span class="card-category">UX Design — 2023</span>
+      <span class="card-category">Digital Design — 2023</span>
       <span class="card-title">HabitApp</span>
     </div>
   </a>
