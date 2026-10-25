@@ -1,146 +1,161 @@
 ---
-const projects = [
-  {
-    title: "Brick & Canvas",
-    tag: "Gallery analytics app — Figma prototype",
-    year: "2026",
-    cover: "/brick-canvas-cover.png",
-    href: "/projects/brick-and-canvas",
-  },
-  {
-    title: "HabitApp",
-    tag: "Behaviour change app",
-    year: "2025",
-    cover: "/habit-cover.png",
-    href: "/projects/habitapp",
-  },
-];
 ---
-
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Digital Products — Nicolás Joannes</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/png" href="/earth.png" />
+<title>Digital Design — Nicolas Joannes</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:#0c0c0c;background:#f8f8f6;opacity:0;transition:opacity .5s ease;overflow-x:hidden}
 
-      body {
-        font-family: 'EB Garamond', Georgia, serif;
-        background: #f5f5f3;
-        color: #1a1a1a;
-      }
+nav{
+  position:fixed;top:1.1rem;left:50%;transform:translateX(-50%);
+  width:calc(100% - 3.5rem);max-width:1120px;
+  padding:.65rem 1rem .65rem 1.4rem;
+  display:flex;justify-content:space-between;align-items:center;
+  z-index:200;
+  background:linear-gradient(145deg,rgba(28,28,28,0.58) 0%,rgba(12,12,12,0.48) 100%);
+  backdrop-filter:blur(24px) saturate(160%);
+  -webkit-backdrop-filter:blur(24px) saturate(160%);
+  border:1px solid rgba(255,255,255,0.11);
+  border-radius:100px;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,0.22),
+    inset 0 -1px 0 rgba(255,255,255,0.04),
+    inset 1px 0 rgba(255,255,255,0.06),
+    inset -1px 0 rgba(255,255,255,0.06),
+    0 8px 32px rgba(0,0,0,0.24),
+    0 2px 6px rgba(0,0,0,0.14);
+  transition:box-shadow .5s ease,background .5s ease;
+}
+nav:hover{
+  background:linear-gradient(145deg,rgba(30,30,30,0.64) 0%,rgba(14,14,14,0.54) 100%);
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,0.3),
+    inset 0 -1px 0 rgba(255,255,255,0.06),
+    inset 1px 0 rgba(255,255,255,0.08),
+    inset -1px 0 rgba(255,255,255,0.08),
+    0 12px 40px rgba(0,0,0,0.3),
+    0 2px 6px rgba(0,0,0,0.18);
+}
+.logo{font-size:.66rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.88);text-decoration:none;padding:.3rem .2rem}
+a{text-decoration:none}
+nav ul{list-style:none;display:flex;gap:.25rem;align-items:center}
+nav ul li a{
+  position:relative;display:block;
+  color:rgba(255,255,255,0.65);
+  font-size:.63rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  padding:.42rem .85rem;border-radius:100px;
+  transition:color .3s ease;isolation:isolate;
+}
+nav ul li a::before{
+  content:'';position:absolute;inset:0;z-index:-1;
+  border-radius:100px;
+  background:rgba(255,255,255,0.11);
+  border:1px solid rgba(255,255,255,0.1);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.18);
+  transform:scale(0.65) translateY(2px);opacity:0;
+  transition:
+    transform .5s cubic-bezier(0.34,1.56,0.64,1),
+    opacity .3s ease,
+    border-radius .5s cubic-bezier(0.34,1.56,0.64,1);
+}
+nav ul li a:hover{color:rgba(255,255,255,1)}
+nav ul li a:hover::before{transform:scale(1) translateY(0);opacity:1;border-radius:38% 62% 55% 45% / 45% 40% 60% 55%}
 
-      nav {
-        position: fixed;
-        top: 0; left: 0; right: 0;
-        display: flex;
-        justify-content: space-between;
-        padding: 1.5rem 2rem;
-        z-index: 10;
-        mix-blend-mode: difference;
-        color: #fff;
-      }
-      nav a { color: inherit; text-decoration: none; font-size: 1rem; }
-      nav ul { list-style: none; display: flex; gap: 2rem; }
-      nav a:hover { opacity: 0.6; }
+/* page header */
+.page-header{padding:7rem 3rem 4rem;border-bottom:1px solid rgba(12,12,12,0.07)}
+.page-header-label{font-size:.62rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:rgba(12,12,12,0.32);display:block;margin-bottom:1.5rem}
+.page-header h1{font-size:clamp(3.5rem,7vw,6.5rem);font-weight:700;letter-spacing:-.04em;line-height:.92;color:#0c0c0c}
 
-      .intro {
-        min-height: 60vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        padding: 0 2rem 4rem;
-      }
-      .intro h1 {
-        font-size: clamp(3rem, 8vw, 7rem);
-        font-weight: 400;
-        line-height: 1;
-        letter-spacing: -0.02em;
-      }
-      .intro h1 em { font-style: italic; }
-      .intro p {
-        margin-top: 1.5rem;
-        max-width: 520px;
-        font-size: 1.25rem;
-        line-height: 1.5;
-        color: #555;
-      }
+/* card grid */
+.work-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;padding:1.5rem 3rem 7rem}
+.card{display:block;color:inherit;overflow:hidden}
+.card-image{width:100%;aspect-ratio:3/2;overflow:hidden}
+.card-image-inner{width:100%;height:100%;background-size:cover;background-position:center;background-repeat:no-repeat;transition:transform .85s cubic-bezier(0.25,0.46,0.45,0.94)}
+.card:hover .card-image-inner{transform:scale(1.05)}
+.card-info{padding:.9rem 0 0}
+.card-category{display:block;font-size:.58rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(12,12,12,0.36);margin-bottom:.38rem}
+.card-title{display:block;font-size:1rem;font-weight:500;letter-spacing:-.01em;color:#0c0c0c;transition:color .25s}
+.card:hover .card-title{color:rgba(12,12,12,0.42)}
 
-      .grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-      }
+/* section header */
+.section-header{padding:3rem 3rem 0;border-top:1px solid rgba(12,12,12,0.07);scroll-margin-top:5rem}
+.section-header h2{font-size:clamp(2.4rem,4.6vw,4.2rem);font-weight:700;letter-spacing:-.04em;line-height:.95;color:#0c0c0c}
 
-      .card {
-        position: relative;
-        display: block;
-        height: 100vh;
-        overflow: hidden;
-        color: #fff;
-        text-decoration: none;
-        background: #ddd;
-      }
-      .card img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.8s ease;
-      }
-      .card:hover img { transform: scale(1.04); }
+/* scroll reveal */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(0.25,0.46,0.45,0.94),transform .9s cubic-bezier(0.25,0.46,0.45,0.94)}
+.reveal.visible{opacity:1;transform:translateY(0)}
 
-      .card .meta {
-        position: absolute;
-        left: 2rem; right: 2rem; bottom: 2rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-        text-shadow: 0 1px 12px rgba(0,0,0,0.3);
-      }
-      .card h2 { font-size: 2rem; font-weight: 400; }
-      .card span { font-size: 1rem; font-style: italic; opacity: 0.9; }
+@media(max-width:768px){
+  nav{top:.7rem;width:calc(100% - 2rem);padding:.55rem .6rem .55rem 1rem}
+  nav ul{gap:.15rem}
+  .page-header{padding:6rem 1.5rem 3rem}
+  .work-grid{grid-template-columns:1fr;gap:1rem;padding:1rem 1.5rem 5rem}
+  .section-header{padding:2.5rem 1.5rem 0}
+}
+</style>
+</head>
+<body>
 
-      @media (max-width: 768px) {
-        .grid { grid-template-columns: 1fr; }
-        .card { height: 75vh; }
-        nav ul { gap: 1rem; }
-      }
-    </style>
-  </head>
-  <body>
-    <nav>
-      <a href="/">Nicolás Joannes</a>
-      <ul>
-        <li><a href="/">Work</a></li>
-        <li><a href="/digital-products">Digital</a></li>
-        <li><a href="/contact">Contact</a></li>
-      </ul>
-    </nav>
+<nav>
+  <a href="/" class="logo">Nicolas Joannes</a>
+  <ul>
+    <li><a href="/work">Work</a></li>
+    <li><a href="/digital-products">Digital Design</a></li>
+    <li><a href="/contact">Contact</a></li>
+  </ul>
+</nav>
 
-    <section class="intro">
-      <h1>Digital <em>products</em></h1>
-      <p>Apps, interfaces and prototypes, designed with behavioural science.</p>
-    </section>
+<div class="page-header reveal">
+  <span class="page-header-label">Portfolio</span>
+  <h1>Digital Design</h1>
+</div>
 
-    <section class="grid">
-      {projects.map((p) => (
-        <a class="card" href={p.href}>
-          <img src={p.cover} alt={p.title} />
-          <div class="meta">
-            <div>
-              <h2>{p.title}</h2>
-              <span>{p.tag}</span>
-            </div>
-            <span>{p.year}</span>
-          </div>
-        </a>
-      ))}
-    </section>
-  </body>
+<div class="work-grid">
+  <a href="/projects/brick-and-canvas" class="card reveal" style="transition-delay:0s">
+    <div class="card-image"><video class="card-image-inner" src="/brick-canvas.mp4" poster="/brick-canvas-cover.svg" autoplay muted loop playsinline style="object-fit:cover;display:block"></video></div>
+    <div class="card-info">
+      <span class="card-category">Digital Design — 2026</span>
+      <span class="card-title">Brick &amp; Canvas</span>
+    </div>
+  </a>
+  <a href="/projects/habitapp" class="card reveal" style="transition-delay:.1s">
+    <div class="card-image"><div class="card-image-inner" style="background-image:url('/habitapp1.png')"></div></div>
+    <div class="card-info">
+      <span class="card-category">Digital Design — 2023</span>
+      <span class="card-title">HabitApp</span>
+    </div>
+  </a>
+</div>
+
+<script>
+function showPage() { document.body.style.opacity = '1'; }
+if (document.readyState === 'complete') { showPage(); } else { window.addEventListener('load', showPage); }
+window.addEventListener('pageshow', showPage);
+window.addEventListener('pagehide', e => { if ((e as PageTransitionEvent).persisted) { document.body.style.transition = 'none'; document.body.style.opacity = '1'; } });
+
+document.querySelectorAll('a[href^="/projects"]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const href = (link as HTMLAnchorElement).getAttribute('href') as string;
+    document.body.style.transition = 'opacity .4s ease';
+    document.body.style.opacity = '0';
+    setTimeout(() => { window.location.href = href; }, 400);
+  });
+});
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) { entry.target.classList.add('visible'); io.unobserve(entry.target); }
+  });
+}, { threshold: 0.05 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
 </html>

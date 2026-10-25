@@ -10,7 +10,7 @@ const projects = [
   { slug: 'flooding-assistance-vehicle', title: 'Flooding Assistance Vehicle', category: 'Product Design', year: '2025', image: '/fav-cover1.png' },
   { slug: 'swiftlift', title: 'SwiftLift', category: 'Product Design', year: '2025', image: '/swiftlift-cover.png', hideTitle: true },
   { slug: 'bed', title: 'How to Make a Bed', category: 'Product Design', year: '2024', image: '/bed-cover.jpg', hideTitle: true },
-  { slug: 'brick-and-canvas', title: 'Brick & Canvas', category: 'Digital Design', year: '2026', image: '/brick-canvas-cover.svg' },
+  { slug: 'brick-and-canvas', title: 'Brick & Canvas', category: 'Digital Design', year: '2026', image: '/brick-canvas-cover.svg', video: '/brick-canvas.mp4' },
   { slug: 'habitapp', title: 'HabitApp', category: 'Digital Design', year: '2023', image: '/habitapp2.png' },
 ];
 ---
@@ -135,6 +135,7 @@ footer a:hover{color:#fff}
   <a href="/" class="logo">Nicolas Joannes</a>
   <ul>
     <li><a href="/work">Work</a></li>
+    <li><a href="/digital-products">Digital Design</a></li>
     <li><a href="/contact">Contact</a></li>
   </ul>
 </nav>
@@ -145,7 +146,9 @@ footer a:hover{color:#fff}
 
 {projects.map((p, i) => (
   <section class="project">
-    <div class="project-bg" style={`background-image:url('${p.image}')`}></div>
+    {p.video
+      ? <video class="project-bg" src={p.video} poster={p.image} autoplay muted loop playsinline style="object-fit:cover;width:100%;height:100%"></video>
+      : <div class="project-bg" style={`background-image:url('${p.image}')`}></div>}
     <div class="project-overlay"></div>
     <a href={`/projects/${p.slug}`} class="project-link" aria-label={p.title}></a>
     <div class="project-content reveal">
