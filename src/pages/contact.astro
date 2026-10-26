@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" href="/earth.png" />
 <title>Contact — Nicolas Joannes</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Inter',sans-serif;background:#f8f8f6;color:#0c0c0c;min-height:100vh;display:flex;flex-direction:column;opacity:0;transition:opacity .5s ease}
 
@@ -65,23 +65,91 @@ nav ul li a::before{
 }
 nav ul li a:hover{color:rgba(255,255,255,1)}
 nav ul li a:hover::before{transform:scale(1) translateY(0);opacity:1;border-radius:38% 62% 55% 45% / 45% 40% 60% 55%}
+nav ul li a[aria-current="page"]{color:#fff}
+nav ul li a[aria-current="page"]::before{transform:scale(1) translateY(0);opacity:1}
 
-.page{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 3rem;max-width:700px;margin:0 auto;width:100%}
+/* ── contact card ── */
+.wrap{flex:1;display:flex;align-items:center;justify-content:center;padding:7.5rem 1.75rem 3rem}
+.card{
+  width:100%;max-width:1120px;
+  display:grid;grid-template-columns:1fr 1.08fr;
+  background:#fff;border-radius:28px;overflow:hidden;
+  border:1px solid rgba(12,12,12,0.05);
+  box-shadow:0 40px 100px rgba(12,12,12,0.08),0 6px 18px rgba(12,12,12,0.04);
+}
+.visual{position:relative;background:#87cfb5;min-height:600px;overflow:hidden}
+.visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:18% 35%;transform:scale(1.04);transition:transform 1.4s cubic-bezier(0.25,0.46,0.45,0.94)}
+.card:hover .visual img{transform:scale(1)}
+.chip{
+  position:absolute;left:1.4rem;bottom:1.4rem;
+  display:inline-flex;align-items:center;gap:.55rem;
+  padding:.55rem 1rem .55rem .8rem;border-radius:100px;
+  font-size:.6rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,0.9);
+  background:linear-gradient(145deg,rgba(28,28,28,0.58) 0%,rgba(12,12,12,0.48) 100%);
+  backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);
+  border:1px solid rgba(255,255,255,0.11);
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,0.22),0 8px 24px rgba(0,0,0,0.18);
+}
+.dot{width:7px;height:7px;border-radius:50%;background:#7CFFB2;box-shadow:0 0 0 3px rgba(124,255,178,0.22);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px rgba(124,255,178,0)}}
 
-.contact-link{display:flex;justify-content:space-between;align-items:center;padding:1.4rem 0;border-top:1px solid rgba(12,12,12,0.08);text-decoration:none;color:#0c0c0c;transition:opacity .2s}
-.contact-link:last-child{border-bottom:1px solid rgba(12,12,12,0.08)}
-.contact-link:hover{opacity:.38}
-.label{font-size:.58rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(12,12,12,0.38)}
-.value{font-size:1.5rem;font-weight:400;letter-spacing:-.01em}
-.arrow{font-size:1rem;opacity:.28}
+.panel{padding:3.6rem 3.6rem 3rem;display:flex;flex-direction:column}
+.label{font-size:.62rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:rgba(12,12,12,0.32);display:block}
+h1{font-size:clamp(2.8rem,5vw,4.6rem);font-weight:700;letter-spacing:-.04em;line-height:.92;margin:1.3rem 0 1.1rem}
+.lead{font-size:1rem;font-weight:300;line-height:1.6;color:rgba(12,12,12,0.55);max-width:26rem;margin-bottom:2.6rem}
 
+form{display:flex;flex-direction:column;gap:1.6rem}
+.field{display:flex;flex-direction:column;gap:.45rem}
+.field label{font-size:.58rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(12,12,12,0.38);transition:color .25s}
+.field:focus-within label{color:#0c0c0c}
+input,textarea{
+  font:inherit;font-size:1.05rem;font-weight:400;letter-spacing:-.01em;color:#0c0c0c;
+  background:transparent;border:0;border-bottom:1px solid rgba(12,12,12,0.12);
+  padding:.55rem 0 .7rem;outline:none;border-radius:0;
+  transition:border-color .3s ease;
+}
+textarea{resize:none;min-height:6.5rem;line-height:1.5}
+input::placeholder,textarea::placeholder{color:rgba(12,12,12,0.22)}
+input:focus,textarea:focus{border-bottom-color:#0c0c0c}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem}
+
+.actions{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:.6rem;flex-wrap:wrap}
+button{
+  position:relative;isolation:isolate;cursor:pointer;
+  font:inherit;font-size:.66rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#fff;
+  padding:1rem 1.6rem;border:1px solid rgba(255,255,255,0.08);border-radius:100px;
+  background:linear-gradient(145deg,#1c1c1c 0%,#0c0c0c 100%);
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,0.18),0 10px 28px rgba(12,12,12,0.22);
+  transition:transform .5s cubic-bezier(0.34,1.56,0.64,1),box-shadow .4s ease,border-radius .5s cubic-bezier(0.34,1.56,0.64,1);
+}
+button:hover{transform:translateY(-2px);border-radius:38% 62% 55% 45% / 45% 40% 60% 55%;box-shadow:inset 0 1.5px 0 rgba(255,255,255,0.26),0 16px 36px rgba(12,12,12,0.28)}
+button span{display:inline-block;margin-left:.5rem;transition:transform .4s cubic-bezier(0.34,1.56,0.64,1)}
+button:hover span{transform:translate(2px,-2px)}
+.status{font-size:.8rem;font-weight:300;color:rgba(12,12,12,0.55);opacity:0;transition:opacity .4s ease}
+.status.show{opacity:1}
+
+.direct{display:grid;grid-template-columns:1fr 1fr;margin-top:auto;padding-top:2.6rem}
+.direct a{display:flex;flex-direction:column;gap:.35rem;padding:1.1rem 0 0;border-top:1px solid rgba(12,12,12,0.08);color:#0c0c0c;transition:opacity .2s}
+.direct a + a{padding-left:1.2rem}
+.direct a:hover{opacity:.4}
+.direct .value{font-size:.92rem;font-weight:400;letter-spacing:-.01em}
+
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(0.25,0.46,0.45,0.94),transform .9s cubic-bezier(0.25,0.46,0.45,0.94)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){
+  .card{grid-template-columns:1fr}
+  .visual{min-height:0;height:360px}
+  .panel{padding:2.4rem 1.6rem 2rem}
+}
 @media(max-width:768px){
   nav{top:.7rem;width:calc(100% - 2rem);padding:.55rem .6rem .55rem 1rem}
   nav ul{gap:.15rem}
-  .page{padding:0 1.5rem}
-  .value{font-size:1.1rem}
+  .wrap{padding:5.5rem 1rem 1.5rem}
+  .card{border-radius:22px}
+  .row,.direct{grid-template-columns:1fr}
+  .direct a + a{padding-left:0;margin-top:1rem}
 }
-
 </style>
 </head>
 <body>
@@ -91,28 +159,91 @@ nav ul li a:hover::before{transform:scale(1) translateY(0);opacity:1;border-radi
   <ul>
     <li><a href="/work">Work</a></li>
     <li><a href="/digital-products">Digital Design</a></li>
-    <li><a href="/contact">Contact</a></li>
+    <li><a href="/contact" aria-current="page">Contact</a></li>
   </ul>
 </nav>
 
-<div class="page">
-  <a href="mailto:nico.gil.arboli@gmail.com" class="contact-link">
-    <span class="label">Email</span>
-    <span class="value">nico.gil.arboli@gmail.com</span>
-    <span class="arrow">↗</span>
-  </a>
-  <a href="https://linkedin.com/in/njoannes" target="_blank" class="contact-link">
-    <span class="label">LinkedIn</span>
-    <span class="value">njoannes</span>
-    <span class="arrow">↗</span>
-  </a>
-</div>
+<main class="wrap">
+  <section class="card reveal">
+    <div class="visual">
+      <img src="/contact-lego.jpg" alt="LEGO figure holding a mobile phone" />
+      <span class="chip"><span class="dot"></span>London · Open to new projects</span>
+    </div>
+
+    <div class="panel">
+      <span class="label">Contact</span>
+      <h1>Let’s talk.</h1>
+      <p class="lead">Have a project, a role or just a question? Send a message and I’ll get back to you.</p>
+
+      <form id="contact-form" novalidate>
+        <div class="row">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" placeholder="Your name" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@email.com" autocomplete="email" required />
+          </div>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell me a little about what you have in mind" required></textarea>
+        </div>
+        <div class="actions">
+          <button type="submit">Send message<span>↗</span></button>
+          <p class="status" id="status" role="status"></p>
+        </div>
+      </form>
+
+      <div class="direct">
+        <a href="mailto:nico.gil.arboli@gmail.com">
+          <span class="label">Email</span>
+          <span class="value">nico.gil.arboli@gmail.com</span>
+        </a>
+        <a href="https://linkedin.com/in/njoannes" target="_blank" rel="noopener">
+          <span class="label">LinkedIn</span>
+          <span class="value">njoannes ↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
 
 <script>
 function showPage() { document.body.style.opacity = '1'; }
 if (document.readyState === 'complete') { showPage(); } else { window.addEventListener('load', showPage); }
 window.addEventListener('pageshow', showPage);
 window.addEventListener('pagehide', e => { if ((e as PageTransitionEvent).persisted) { document.body.style.transition = 'none'; document.body.style.opacity = '1'; } });
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) { entry.target.classList.add('visible'); io.unobserve(entry.target); }
+  });
+}, { threshold: 0.05 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// No backend: the form opens the visitor's email app with everything filled in.
+const form = document.getElementById('contact-form') as HTMLFormElement;
+const status = document.getElementById('status') as HTMLElement;
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  if (!form.checkValidity()) {
+    status.textContent = 'Please fill in your name, a valid email and a message.';
+    status.classList.add('show');
+    (form.querySelector(':invalid') as HTMLElement)?.focus();
+    return;
+  }
+  const data = new FormData(form);
+  const name = String(data.get('name')).trim();
+  const email = String(data.get('email')).trim();
+  const message = String(data.get('message')).trim();
+  const subject = `Portfolio enquiry from ${name}`;
+  const body = `${message}\n\n— ${name}\n${email}`;
+  window.location.href = `mailto:nico.gil.arboli@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  status.textContent = 'Your email app should open with the message ready to send.';
+  status.classList.add('show');
+});
 </script>
 
 </body>
